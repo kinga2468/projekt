@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    One Categories
+{% endblock %}
+
+{% block body %}
+    <h1>
+    Pojedyncza kategoria
+    </h1>
+    {% if categorie|length %}
+        <div>
+            {{ categorie.id }}. {{ categorie.title }}
+        </div>
+    {% else %}
+        <div>
+            Brak kategorii!
+        </div>
+    {% endif %}
+{% endblock %}
