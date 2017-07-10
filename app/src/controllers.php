@@ -1,48 +1,31 @@
 <?php
-/**
- * Routing and controllers.
- */
-/*do bazy danych */
-use Model\Categories\Arr\Categories;
-use Model\Expenses\Arr\Expenses;
-use Model\Budgets\Arr\Budgets;
-use Model\Datas\Arr\Datas;
-use Model\Roles\Arr\Roles;
-use Model\Users\Arr\Users;
 
-$categoriesModel = new Categories();
-$expensesModel = new Expenses();
-$budgetsModel = new Budgets();
-$datasModel = new Datas();
-$rolesModel = new Roles();
-$usersModel = new Users();
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-$app->get(
-    '/categories',
-    function () use ($app, $categoriesModel) {
-        return $app['twig']->render(
-            'categorie/index.html.twig',
-            ['categories' => $categoriesModel->findAll()]
-        );
+//Request::setTrustedProxies(array('127.0.0.1'));
+
+$app->get('/', function () use ($app) {
+    return $app['twig']->render('index.html.twig', array());
+})
+->bind('homepage')
+;
+
+$app->error(function (\Exception $e, Request $request, $code) use ($app) {
+    if ($app['debug']) {
+        return;
     }
-);
 
-$app->get(
-    '/categories/{id}',
-    function ($id) use ($app, $categoriesModel) {
-        return $app['twig']->render(
-            'categorie/view.html.twig',
-            ['categorie' => $categoriesModel->findOneById($id)]
-        );
-    }
-);
+    // 404.html, or 40x.html, or 4xx.html, or error.html
+    $templates = array(
+        'errors/'.$code.'.html.twig',
+        'errors/'.substr($code, 0, 2).'x.html.twig',
+        'errors/'.substr($code, 0, 1).'xx.html.twig',
+        'errors/default.html.twig',
+    );
 
-$app->get(
-    '/history',
-    function () use ($app, $budgetsModel) {
-        return $app['twig']->render(
-            'history/index.html.twig',
-            ['budgets' => $budgetsModel->findAll()]
-        );
-    }
-);
+    return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
+});

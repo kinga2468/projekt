@@ -16,7 +16,6 @@
             </div>
             <div class="historia">
                 <p><a title="Historia" href="#">Historia</a></p>
-                <p><a title="Bieżący miesiąc" href="index.html.twig">Bieżący miesiąc</a></p>
             </div>
             {% endblock %}
         </header>
@@ -34,11 +33,17 @@
             </div>
             <div class="przyciski">
                 <div class="wydatki">
-                    <p class="wprzycisk"><a title="dodaj wydatek" href="#">Dodaj wydatek</a></p>
+                    <p class="wprzycisk"><a title="dodaj wydatek" href="#">Dodaj kwote</a></p>
                 </div>
                 <div class="stworz_kategorie">
                     <p class="wprzycisk"><a title="stwórz kategorie" href="#">Stwórz kategorie</a></p>
                 </div>
+            </div>
+            <div class="zostalo">
+                <p>Zostało: </p>
+                <form action="#" method="post">
+                    <input type="text" name="zostalo"/>
+                </form>
             </div>
             <div class="kategorie">
                 {% if categories|length %}

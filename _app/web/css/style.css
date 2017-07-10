@@ -52,20 +52,25 @@ a{text-decoration:none; color:black;}
 .witaj p{font-size:1.3em;}
 .historia{background-color: #7AC402; clear:both; float:right; width:100%; }
 .historia p{float:right; font-size:1.3em; margin:7px 15px;}
-.miesiac{clear:both; width: 120px; margin:0 auto; font-weight: bold; font-size:1.3em; color:#663C23;}
-.fa-angle-left{float:left; margin:13px 10px 10px 10px; }
-.miesiac .data{float:left; margin:10px; }
-.fa-angle-right{float:left; margin:13px 10px 10px 10px; }
+.miesiac{background-color:red; clear:both; width: 400px; margin:0 auto; font-weight: bold; font-size:1.3em; color:#663C23;}
+.fa-angle-left{float:left; margin:0; }
+.miesiac .data{width: 200px;  margin:0 auto; background-color: blue;}
+.miesiąc .data p{text-align: center;}
+.fa-angle-right{float:left; margin:0; }
 .limit{clear:both; width:350px; margin:0 auto; margin-bottom:40px;}
-.limit p{font-size:1.3em; display:block; float:left; margin: 0 5px 0 0;}
-.limit input{display:block; float:left; height:20px; width:250px; color:black; outline:none;
-    background-color:#dddddd; font-size:0.7em; font-weight:400; padding:5px 15px; border:none;}
+.limit p{font-size:1.3em; display:block; float:left; margin: 2px 5px 0 0;}
+.limit input{display:block; float:left; height:20px; width:250px; color:black; outline:none; border:none; font-size:1em;
+    background-color:#dddddd; font-weight:400; padding:5px 15px; font-family: Lato, helvetica, arial, sans-serif;}
 .wydatki{background-color: #D17B48; clear:both; width:200px; float:left; height:50px;}
 .stworz_kategorie{background-color:#D17B48 ; width:200px; float:left; height:50px; margin-left:5px;}
 .wprzycisk{text-align: center; font-size:1.2em; padding:12px; }
 .przyciski{margin-left:298px; margin-bottom:100px;}
+.zostalo{clear:both; width:220px; margin:0 auto; margin-bottom:143px;}
+.zostalo p{font-size:1.3em; display:block; float:left; margin: 2px 5px 0 0;}
+.zostalo input{display:block; float:left; height:20px; width:120px; color:black; outline:none; border:none; font-size:1em;
+    background-color:#ededed; font-weight:400; padding:5px 15px; font-family: Lato, helvetica, arial, sans-serif;}
 
-.kategorie{background-color:#838CA3; margin:120px 50px 0 50px ;}
+.kategorie{background-color:#838CA3; margin:130px 50px 0 50px ;}
 .kategoria{border-bottom: solid; height:50px; font-size:1.2em;}
 .kategoria .fa{float:left; margin: 16px 15px;}
 .kategoria .nazwa{float:left; padding: 13px 8px 8px 10px; }
@@ -87,4 +92,5 @@ a{text-decoration:none; color:black;}
 .kategorie2{clear:both; background-color:#838CA3; margin:30px 50px 0 50px ;}
 .przyciski2{margin:0 auto;}
 .nowy_miesiac{background-color:#D17B48 ; width:200px; height:50px; margin:27px auto 0;}
+
 

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Categories
+{% endblock %}
+
+{% block body %}
+    <div class="main-container">
+        <header>
+            {% block header %}
+                <div class="logo">
+                    <a href="log.html">Budżet domowy</a>
+                </div>
+                <div class="witaj">
+                    <p class="wyloguj"><a title="Wyloguj" href="notlog.html">Wyloguj</a></p><p class="imie">Witaj _____, </p>
+                </div>
+                <div class="historia">
+                    <p><a title="Historia" href="#">Historia</a></p>
+                </div>
+            {% endblock %}
+        </header>
+        <div class="kontener">
+            <div class="miesiac">
+                <a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>
+                <div class="data">
+                    {% if budgets|length %}
+                        <p>
+                            {{ budgets.title|upper }}
+                        </p>
+                    {% else %}
+                        <p>
+                            Brak miesiąca!
+                        </p>
+                {% endif %}
+                </div>
+                <a title="Zobacz następny miesiąc" href="#.html"><span class="fa fa-angle-right"></span></a>
+            </div>
+            <div class="limit">
+                <p>Limit: </p>
+                <form action="#" method="post">
+                    <input type="text" name="limit" placeholder="Podaj kwotę"/>
+                </form>
+            </div>
+            <div class="przyciski">
+                <div class="wydatki">
+                    <p class="wprzycisk"><a title="dodaj wydatek" href="#">Dodaj kwote</a></p>
+                </div>
+                <div class="stworz_kategorie">
+                    <p class="wprzycisk"><a title="stwórz kategorie" href="#">Stwórz kategorie</a></p>
+                </div>
+            </div>
+            <div class="zostalo">
+                <p>Zostało: </p>
+                <form action="#" method="post">
+                    <input type="text" name="zostalo"/>
+                </form>
+            </div>
+            <div class="kategorie">
+
+            </div>
+        </div>
+        <footer>
+            {% block footer %}
+                <p>Projekt z systemu interaktywnego EPI 2017. Projekt i realizacja: Kinga Bożęcka</p>
+            {% endblock %}
+        </footer>
+    </div>
+{% endblock %}

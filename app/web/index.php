@@ -1,15 +1,10 @@
 <?php
-/**
- * Application front controller for `production` environment.
- */
 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', false);
+ini_set('display_errors', 0);
 
-require_once dirname(dirname(__FILE__)).'/vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
-$app = require_once dirname(dirname(__FILE__)).'/src/app.php';
-
-require_once dirname(dirname(__FILE__)).'/src/controllers.php';
-
+$app = require __DIR__.'/../src/app.php';
+require __DIR__.'/../config/prod.php';
+require __DIR__.'/../src/controllers.php';
 $app->run();
