@@ -44,9 +44,6 @@ footer{background: #121212; color:white; text-align:center; padding: 30px 0; fon
 
 
 
-
-
-
 .witaj{float:right; width:60%; margin:40px 15px 0 0;}
 .witaj .imie{display:block; float:right; margin:5px 15px 5px 5px;}
 .witaj .wyloguj{display:block; float:right; margin:5px; }
@@ -81,3 +78,13 @@ a{text-decoration:none; color:black;}
 .register input.npassword{margin:10px 0 10px 26px;}
 .register input.wyslij{display:block; margin:20px auto 0; height:auto; width:auto; font-family: Dosis;cursor:pointer; border:none;
     padding:7px 17px 8px; font-size:22px;  background-color:#7AC402; }
+
+/*podstrona z historią */
+.link{float:right; margin: 12px 20px 0 0;}
+.link a:hover{color:#EDEDEA;}
+.history{background-color: #7AC402; clear:both; float:right; width:100%; }
+.history p{text-align: center; font-size:1.3em; margin:7px 15px;}
+.kategorie2{clear:both; background-color:#838CA3; margin:30px 50px 0 50px ;}
+.przyciski2{margin:0 auto;}
+.nowy_miesiac{background-color:#D17B48 ; width:200px; height:50px; margin:27px auto 0;}
+

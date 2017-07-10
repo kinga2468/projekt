@@ -10,7 +10,7 @@ class Budgets
     protected $budgets = [
         [
             'id' => 1,
-            'title' => 'Maj',
+            'title' => 'Maj 2017',
             'date_from' => '01.05.2017',
             'date_to' => '31.05.2017',
             'limit' => 3000,
@@ -19,7 +19,7 @@ class Budgets
         ],
         [
             'id' => 2,
-            'title' => 'Czerwiec',
+            'title' => 'Czerwiec 2017',
             'date_from' => '01.06.2017',
             'date_to' => '31.06.2017',
             'limit' => 4000,
@@ -28,7 +28,7 @@ class Budgets
         ],
         [
             'id' => 3,
-            'title' => 'Lipiec',
+            'title' => 'Lipiec 2017',
             'date_from' => '01.07.2017',
             'date_to' => '31.07.2017',
             'limit' => 3500,
