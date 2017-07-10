@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,900' rel='stylesheet' type='text/css'> <!--czcionka Lato-->
+    <link href='https://fonts.googleapis.com/css?family=Dosis' rel="stylesheet"> <!--czcionka Dosis-->
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'> <!--ikonki-->
+    <title>Zarządzanie budżetem domowym</title>
+</head>
+<body>
+<div class="main-container">
+    <header>
+        <div class="logo">
+            <a href="log.html">Budżet domowy</a>
+        </div>
+        <div class="witaj">
+            <p class="wyloguj"><a title="Wyloguj" href="notlog.html">Wyloguj</a></p><p class="imie">Witaj ______, </p>
+        </div>
+        <div class="historia">
+            <p><a title="Historia" href="#">Historia</a></p>
+            <p><a title="Bieżący miesiąc" href="log.html">Bieżący miesiąc</a></p>
+        </div>
+    </header>
+    <div class="kontener">
+        <div class="miesiac">
+            <a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>
+            <p class="data">LUTY</p>
+            <a title="Zobacz następny miesiąc" href="#.html"><span class="fa fa-angle-right"></span></a>
+        </div>
+        <div class="limit">
+            <p>Limit: </p>
+            <form action="#" method="post">
+                <input type="text" name="limit" placeholder="Podaj kwotę"/>
+            </form>
+        </div>
+        <div class="przyciski">
+            <div class="wydatki">
+                <p class="wprzycisk"><a title="dodaj wydatek" href="#">Dodaj wydatek</a></p>
+            </div>
+            <div class="stworz_kategorie">
+                <p class="wprzycisk"><a title="stwórz kategorie" href="#">Stwórz kategorie</a></p>
+            </div>
+        </div>
+        <div class="kategorie">
+            <div class="kategoria k">
+                <span class="fa fa-money"></span>
+                <p class="nazwa">OSZCZĘDNOŚCI</p>
+                <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+            </div>
+            <div class="kategoria k">
+                <span class="fa fa-shopping-cart"></span>
+                <p class="nazwa">ZAKUPY</p>
+                <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+            </div>
+            <div class="kategoria k">
+                <span class="fa fa-car"></span>
+                <p class="nazwa">PALIWO</p>
+                <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+            </div>
+            <div class="kategoria k">
+                <span class="fa fa-credit-card"></span>
+                <p class="nazwa">RACHUNKI</p>
+                <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+            </div>
+            <div class="kategoria k">
+                <span class="fa fa-gamepad"></span>
+                <p class="nazwa">ROZRYWKA</p>
+                <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Projekt z systemu interaktywnego EPI 2017. Projekt i realizacja: Kinga Bożęcka</p>
+    </footer>
+</div>
+</body>
+</html>

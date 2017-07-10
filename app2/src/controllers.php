@@ -38,10 +38,10 @@ $app->get(
 );
 
 /*
-$_app->get(
+$app2->get(
     '/history',
-    function () use ($_app, $budgetsModel) {
-        return $_app['twig']->render(
+    function () use ($app2, $budgetsModel) {
+        return $app2['twig']->render(
             'history/index.html.twig',
             ['budgets' => $budgetsModel->findAll()]
         );

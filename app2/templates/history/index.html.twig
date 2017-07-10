@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block body %}
+    <div class="main-container">
+        <header>
+            {% block header %}
+                <div class="logo">
+                    <a href="log.html">Budżet domowy</a>
+                </div>
+                <div class="witaj">
+                    <p class="wyloguj"><a title="Wyloguj" href="notlog.html">Wyloguj</a></p><p class="imie">Witaj _____, </p>
+                </div>
+                <div class="history">
+                    <p><a titile="Historia" href="">Historia</a></p>
+                </div>
+            {% endblock %}
+        </header>
+        <div class="kontener">
+            <div class="przyciski2">
+                <div class="nowy_miesiac">
+                    <p class="wprzycisk"><a title="dodaj miesiąc" href="#">Dodaj nowy miesiąc</a></p>
+                </div>
+            </div>
+            <div class="kategorie2">
+                {% if budgets|length %}
+                    {% for row in budgets %}
+                        <div class="kategoria k">
+                            <p class="nazwa">{{ row.title|upper }}</p>
+                            <div class="link">
+                                <a title="Zobacz" href="#">zobacz </a>|
+                                <a title="Usuń" href="#"> usuń</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+
+
+
+
+                <!--
+                <div class="kategoria k">
+                    <span class="fa fa-shopping-cart"></span>
+                    <p class="nazwa">ZAKUPY</p>
+                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+                </div>
+                <div class="kategoria k">
+                    <span class="fa fa-car"></span>
+                    <p class="nazwa">PALIWO</p>
+                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+                </div>
+                <div class="kategoria k">
+                    <span class="fa fa-credit-card"></span>
+                    <p class="nazwa">RACHUNKI</p>
+                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+                </div>
+                <div class="kategoria k">
+                    <span class="fa fa-gamepad"></span>
+                    <p class="nazwa">ROZRYWKA</p>
+                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+                </div>-->
+            </div>
+        </div>
+        <footer>
+            {% block footer %}
+                <p>Projekt z systemu interaktywnego EPI 2017. Projekt i realizacja: Kinga Bożęcka</p>
+            {% endblock %}
+        </footer>
+    </div>
+
+
+    {#
+    {% if categories|length %}
+        <ul>
+            {% for row in categories %}
+                <li>{{ row.id }}. {{ row.title }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div>
+            Brak elementów!
+        </div>
+    {% endif %}
+    #}
+{% endblock %}
