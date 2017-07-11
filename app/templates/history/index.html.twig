@@ -29,11 +29,11 @@
                 {% if month|length %}
                     {% for row in month %}
                         <div class="kategoria k">
-                            <p class="nazwa">{{ row.name|upper }}</p>
+                            <p class="nazwa">{{ row.name|upper }}, {{ row.limit }}</p>
                             <div class="link">
-                                <a href="{{ url('month_view', {'id': row.id_month}) }}" title="{{ 'zobacz zakładkę'|trans }}">
-                                    {{ 'zobacz zakładkę'|trans }}
-                                </a>
+                                {#<a href="{{ url('month_view', {'id': row.id}) }}" title="{{ 'zobacz'|trans }}">
+                                    {{ 'zobacz'|trans }}
+                                </a>#}
                                 {#<a title="Zobacz" href="#">zobacz </a>#}|
                                 <a title="Usuń" href="#"> usuń</a>
                             </div>

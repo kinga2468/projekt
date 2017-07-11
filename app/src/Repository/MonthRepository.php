@@ -53,8 +53,8 @@ class MonthRepository
     public function findOneById($id)
     {
         $queryBuilder = $this->queryAll();
-        $queryBuilder->where('m.id_month = :id_month')
-            ->setParameter(':id_month', $id, \PDO::PARAM_INT);
+        $queryBuilder->where('m.id = :id')
+            ->setParameter(':id', $id, \PDO::PARAM_INT);
         $result = $queryBuilder->execute()->fetch();
 
         return !$result ? [] : $result;

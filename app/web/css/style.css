@@ -52,9 +52,9 @@ a{text-decoration:none; color:black;}
 .witaj p{font-size:1.3em;}
 .historia{background-color: #7AC402; clear:both; float:right; width:100%; }
 .historia p{float:right; font-size:1.3em; margin:7px 15px;}
-.miesiac{background-color:red; clear:both; width: 400px; margin:0 auto; font-weight: bold; font-size:1.3em; color:#663C23;}
+.miesiac{ clear:both; width: 400px; margin:0 auto; font-weight: bold; font-size:1.3em; color:#663C23;}
 .fa-angle-left{float:left; margin:0; }
-.miesiac .data{width: 200px;  margin:0 auto; background-color: blue;}
+.miesiac .data{width: 200px;  margin:0 auto;}
 .miesiąc .data p{text-align: center;}
 .fa-angle-right{float:left; margin:0; }
 .limit{clear:both; width:350px; margin:0 auto; margin-bottom:40px;}
