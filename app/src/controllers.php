@@ -17,6 +17,7 @@ $rolesModel = new Roles();
 $usersModel = new Users();
 
 
+
 $app->get(
     '/categories',
     function () use ($app, $categoriesModel) {
@@ -38,10 +39,10 @@ $app->get(
 );
 
 /*
-$app2->get(
+$app->get(
     '/history',
-    function () use ($app2, $budgetsModel) {
-        return $app2['twig']->render(
+    function () use ($app, $budgetsModel) {
+        return $app['twig']->render(
             'history/index.html.twig',
             ['budgets' => $budgetsModel->findAll()]
         );
@@ -49,4 +50,4 @@ $app2->get(
 );*/
 
 $app->mount('/history', new MonthController());
-$app->mount('/history/{$id}', new MonthController());
+//$app->mount('/history/{$id}', new MonthController());

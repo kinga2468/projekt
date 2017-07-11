@@ -15,7 +15,12 @@
                     <p class="wyloguj"><a title="Wyloguj" href="notlog.html">Wyloguj</a></p><p class="imie">Witaj _____, </p>
                 </div>
                 <div class="historia">
-                    <p><a title="Historia" href="#">Historia</a></p>
+                    <p>
+                        {#<a title="Historia" href="#">Historia</a>#}
+                        <a href="{{ url('month_index') }}" title="{{ 'Historia'|trans }}">
+                            {{ 'Historia'|trans }}
+                        </a>
+                    </p>
                 </div>
             {% endblock %}
         </header>
@@ -23,9 +28,9 @@
             <div class="miesiac">
                 <a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>
                 <div class="data">
-                    {% if budgets|length %}
+                    {% if month|length %}
                         <p>
-                            {{ budgets.title|upper }}
+                            {{ month.name|upper }}
                         </p>
                     {% else %}
                         <p>

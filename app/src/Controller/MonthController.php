@@ -4,10 +4,11 @@
  */
 namespace Controller;
 
-use Model\Budgets\Arr\Budgets;
+//use Model\Budgets\Arr\Budgets;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Repository\MonthRepository;
+//use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class MonthController.
@@ -26,8 +27,8 @@ class MonthController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/', [$this, 'indexAction']);
-        $controller->get('/{id}', [$this, 'viewAction']);
+        $controller->get('/', [$this, 'indexAction'])->bind('month_index');
+        $controller->get('/{id}', [$this, 'viewAction'])->bind('month_view');
 
         return $controller;
     }
@@ -37,23 +38,24 @@ class MonthController implements ControllerProviderInterface
      */
     public function indexAction(Application $app)
     {
-        $budgetsModel = new Budgets();
+        $monthRepository = new MonthRepository($app['db']);
 
         return $app['twig']->render(
             'history/index.html.twig',
-            ['budgets' => $budgetsModel->findAll()]
+            ['month' => $monthRepository->findAll()]
         );
     }
+
     /**
      * View action.
      */
     public function viewAction(Application $app, $id)
     {
-        $budgetsModel = new Budgets();
+        $monthRepository = new MonthRepository($app['db']);
 
         return $app['twig']->render(
             'history/view.html.twig',
-            ['budgets' => $budgetsModel->findOneById($id)]
+            ['month' => $monthRepository->findOneById($id)]
         );
     }
 
