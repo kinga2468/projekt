@@ -23,6 +23,9 @@ class MonthController implements ControllerProviderInterface
     {
         $controller = $app['controllers_factory'];
         $controller->get('/', [$this, 'indexAction'])->bind('month_index');
+        $controller->get('/page/{page}', [$this, 'indexAction'])
+            ->value('page', 1)
+            ->bind('month_index_paginated');
         $controller->get('/{id}', [$this, 'viewAction'])->bind('month_view');
 
         return $controller;
@@ -31,16 +34,15 @@ class MonthController implements ControllerProviderInterface
     /**
      * Index action.
      */
-    public function indexAction(Application $app)
+    public function indexAction(Application $app, $page = 1)
     {
         $monthRepository = new MonthRepository($app['db']);
 
         return $app['twig']->render(
             'history/index.html.twig',
-            ['month' => $monthRepository->findAll()]
+            ['paginator' => $monthRepository->findAllPaginated($page)]
         );
     }
-
     /**
      * View action.
      */

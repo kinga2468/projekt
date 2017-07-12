@@ -8,7 +8,7 @@
     <h1>
     Pojedyncza kategoria
     </h1>
-    {% if categorie|length %}
+    {% if paginator.data|length %}
         <div>
             {{ categorie.id }}. {{ categorie.name }}. {{ categorie.icon }}
         </div>

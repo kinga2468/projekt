@@ -79,6 +79,11 @@ a{text-decoration:none; color:black;}
 .operacje{background-color:#A39A83; margin:130px 50px 0 50px ;}
 /*inne kolory #D8DFEF     */
 
+/*.paginacja{margin-top:50px;}*/
+.prev{float:left; margin:15px 0 15px 55px;}
+.next{float:right; margin:15px 55px 15px 0;}
+footer{margin-top:50px;}
+
 
 /*podstrona signin.html*/
 .register{width:470px; margin:20px auto 0; font-size:20px;  height:400px;}

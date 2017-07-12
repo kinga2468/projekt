@@ -46,14 +46,19 @@
                 </form>
             </div>
             <div class="operacje">
-                {% if operation|length %}
-                    {% for row in operation %}
+                {% if paginator.data|length %}
+                    {% for row in paginator.data %}
                         <div class="kategoria k">
                             <p class="nazwa">{{ row.name|upper }}, {{ row.value }}</p>
                             <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
                         </div>
                     {% endfor %}
                 {% endif %}
+            </div>
+            <div class="paginacja">
+                {% include 'default/_paginator.html.twig' with {
+                paginator: paginator,
+                route_name: 'month_index_paginated',} %}
             </div>
         </div>
         <footer>

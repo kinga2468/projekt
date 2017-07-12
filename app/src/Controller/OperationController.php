@@ -24,6 +24,9 @@ class OperationController implements ControllerProviderInterface
     {
         $controller = $app['controllers_factory'];
         $controller->get('/', [$this, 'indexAction'])->bind('operation_index');
+        $controller->get('/page/{page}', [$this, 'indexAction'])
+            ->value('page', 1)
+            ->bind('operation_index_paginated');
         $controller->get('/{id}', [$this, 'viewAction'])->bind('operation_view');
 
         return $controller;
@@ -32,13 +35,13 @@ class OperationController implements ControllerProviderInterface
     /**
      * Index action.
      */
-    public function indexAction(Application $app)
+    public function indexAction(Application $app, $page = 1)
     {
         $operationRepository = new OperationRepository($app['db']);
 
         return $app['twig']->render(
             'operation/index.html.twig',
-            ['operation' => $operationRepository->findAll()]
+            ['paginator' => $operationRepository->findAllPaginated($page)]
         );
     }
 

@@ -24,6 +24,9 @@ class CategorieController implements ControllerProviderInterface
     {
         $controller = $app['controllers_factory'];
         $controller->get('/', [$this, 'indexAction'])->bind('categorie_index');
+        $controller->get('/page/{page}', [$this, 'indexAction'])
+            ->value('page', 1)
+            ->bind('categorie_index_paginated');
         $controller->get('/{id}', [$this, 'viewAction'])->bind('categorie_view');
 
         return $controller;
@@ -32,13 +35,13 @@ class CategorieController implements ControllerProviderInterface
     /**
      * Index action.
      */
-    public function indexAction(Application $app)
+    public function indexAction(Application $app, $page = 1)
     {
         $categorieRepository = new CategorieRepository($app['db']);
 
         return $app['twig']->render(
             'categorie/index.html.twig',
-            ['categorie' => $categorieRepository->findAll()]
+            ['paginator' => $categorieRepository->findAllPaginated($page)]
         );
     }
 
