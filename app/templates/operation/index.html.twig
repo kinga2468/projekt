@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Categories
+    Operation
 {% endblock %}
 
 {% block body %}
     <div class="main-container">
         <header>
             {% block header %}
-            <div class="logo">
-                <a href="log.html">Budżet domowy</a>
-            </div>
-            <div class="witaj">
-                <p class="wyloguj"><a title="Wyloguj" href="notlog.html">Wyloguj</a></p><p class="imie">Witaj _____, </p>
-            </div>
-            <div class="historia">
-                <p><a title="Historia" href="#">Historia</a></p>
-            </div>
+                <div class="logo">
+                    <a href="log.html">Budżet domowy</a>
+                </div>
+                <div class="witaj">
+                    <p class="wyloguj"><a title="Wyloguj" href="notlog.html">Wyloguj</a></p><p class="imie">Witaj _____, </p>
+                </div>
+                <div class="historia">
+                    <p><a title="Historia" href="#">Historia</a></p>
+                </div>
             {% endblock %}
         </header>
         <div class="kontener">
@@ -45,47 +45,20 @@
                     <input type="text" name="zostalo"/>
                 </form>
             </div>
-            <div class="kategorie">
-                {% if categorie|length %}
-                    {% for row in categorie %}
+            <div class="operacje">
+                {% if operation|length %}
+                    {% for row in operation %}
                         <div class="kategoria k">
-                            <span class="{{ row.icon }}"></span>
-                            <p class="nazwa">{{ row.title|upper }}</p>
+                            <p class="nazwa">{{ row.title|upper }}, {{ row.value }}</p>
                             <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
                         </div>
                     {% endfor %}
                 {% endif %}
-
-
-
-
-
-                <!--
-                <div class="kategoria k">
-                    <span class="fa fa-shopping-cart"></span>
-                    <p class="nazwa">ZAKUPY</p>
-                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
-                </div>
-                <div class="kategoria k">
-                    <span class="fa fa-car"></span>
-                    <p class="nazwa">PALIWO</p>
-                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
-                </div>
-                <div class="kategoria k">
-                    <span class="fa fa-credit-card"></span>
-                    <p class="nazwa">RACHUNKI</p>
-                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
-                </div>
-                <div class="kategoria k">
-                    <span class="fa fa-gamepad"></span>
-                    <p class="nazwa">ROZRYWKA</p>
-                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
-                </div>-->
             </div>
         </div>
         <footer>
             {% block footer %}
-            <p>Projekt z systemu interaktywnego EPI 2017. Projekt i realizacja: Kinga Bożęcka</p>
+                <p>Projekt z systemu interaktywnego EPI 2017. Projekt i realizacja: Kinga Bożęcka</p>
             {% endblock %}
         </footer>
     </div>

@@ -1,20 +1,20 @@
 <?php
 /**
- * Month controller.
+ * Categorie controller.
  */
 namespace Controller;
 
+use Model\Categories\Arr\Categories;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
-use Repository\MonthRepository;
-
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class MonthController.
+ * Class CategorieController.
  *
  * @package Controller
  */
-class MonthController implements ControllerProviderInterface
+class CategorieController implements ControllerProviderInterface
 {
     /**
      * Routing settings.
@@ -22,8 +22,8 @@ class MonthController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/', [$this, 'indexAction'])->bind('month_index');
-        $controller->get('/{id}', [$this, 'viewAction'])->bind('month_view');
+        $controller->get('/', [$this, 'indexAction']);
+        $controller->get('/{id}', [$this, 'viewAction']);
 
         return $controller;
     }
@@ -33,11 +33,11 @@ class MonthController implements ControllerProviderInterface
      */
     public function indexAction(Application $app)
     {
-        $monthRepository = new MonthRepository($app['db']);
+        $categorieModel = new Categories();
 
         return $app['twig']->render(
-            'history/index.html.twig',
-            ['month' => $monthRepository->findAll()]
+            'categorie/index.html.twig',
+            ['categorie' => $categorieModel->findAll()]
         );
     }
 
@@ -46,12 +46,11 @@ class MonthController implements ControllerProviderInterface
      */
     public function viewAction(Application $app, $id)
     {
-        $monthRepository = new MonthRepository($app['db']);
+        $categorieModel = new Categories();
 
         return $app['twig']->render(
-            'history/view.html.twig',
-            ['month' => $monthRepository->findOneById($id)]
+            'categorie/view.html.twig',
+            ['categorie' => $categorieModel->findOneById($id)]
         );
     }
-
 }

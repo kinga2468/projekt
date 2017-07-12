@@ -76,6 +76,9 @@ a{text-decoration:none; color:black;}
 .kategoria .nazwa{float:left; padding: 13px 8px 8px 10px; }
 .k .fa-times-circle{float:right; margin: 17px 20px 0 0;}
 
+.operacje{background-color:#A39A83; margin:130px 50px 0 50px ;}
+/*inne kolory #D8DFEF     */
+
 
 /*podstrona signin.html*/
 .register{width:470px; margin:20px auto 0; font-size:20px;  height:400px;}

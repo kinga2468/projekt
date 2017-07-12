@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    One Operation
+{% endblock %}
+
+{% block body %}
+    <h1>
+        Pojedyncza operacja
+    </h1>
+    {% if operation|length %}
+        <div>
+            {{ operation.id }}. {{ operation.title }}
+        </div>
+    {% else %}
+        <div>
+            Brak kategorii!
+        </div>
+    {% endif %}
+{% endblock %}

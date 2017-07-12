@@ -1,20 +1,20 @@
 <?php
 /**
- * Month controller.
+ * Operation controller.
  */
 namespace Controller;
 
+use Model\Expenses\Arr\Expenses;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
-use Repository\MonthRepository;
-
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class MonthController.
+ * Class OperationController.
  *
  * @package Controller
  */
-class MonthController implements ControllerProviderInterface
+class OperationController implements ControllerProviderInterface
 {
     /**
      * Routing settings.
@@ -22,8 +22,8 @@ class MonthController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/', [$this, 'indexAction'])->bind('month_index');
-        $controller->get('/{id}', [$this, 'viewAction'])->bind('month_view');
+        $controller->get('/', [$this, 'indexAction']);
+        $controller->get('/{id}', [$this, 'viewAction']);
 
         return $controller;
     }
@@ -33,11 +33,11 @@ class MonthController implements ControllerProviderInterface
      */
     public function indexAction(Application $app)
     {
-        $monthRepository = new MonthRepository($app['db']);
+        $operationModel = new Expenses();
 
         return $app['twig']->render(
-            'history/index.html.twig',
-            ['month' => $monthRepository->findAll()]
+            'operation/index.html.twig',
+            ['operation' => $operationModel->findAll()]
         );
     }
 
@@ -46,12 +46,11 @@ class MonthController implements ControllerProviderInterface
      */
     public function viewAction(Application $app, $id)
     {
-        $monthRepository = new MonthRepository($app['db']);
+        $operationModel = new Expenses();
 
         return $app['twig']->render(
-            'history/view.html.twig',
-            ['month' => $monthRepository->findOneById($id)]
+            'operation/view.html.twig',
+            ['operation' => $operationModel->findOneById($id)]
         );
     }
-
 }
