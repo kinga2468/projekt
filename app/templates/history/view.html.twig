@@ -27,9 +27,9 @@
             <div class="miesiac">
                 <a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>
                 <div class="data">
-                    {% if budgets|length %}
+                    {% if month|length %}
                         <p>
-                            {{ budgets.title|upper }}, {{ budgets.id }}
+                            {{ month.name|upper }}
                         </p>
                     {% else %}
                         <p>
