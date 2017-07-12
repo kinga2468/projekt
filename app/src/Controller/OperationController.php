@@ -4,10 +4,11 @@
  */
 namespace Controller;
 
-use Model\Expenses\Arr\Expenses;
+//use Model\Expenses\Arr\Expenses;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Repository\OperationRepository;
+//use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class OperationController.
@@ -22,8 +23,8 @@ class OperationController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/', [$this, 'indexAction']);
-        $controller->get('/{id}', [$this, 'viewAction']);
+        $controller->get('/', [$this, 'indexAction'])->bind('operation_index');
+        $controller->get('/{id}', [$this, 'viewAction'])->bind('operation_view');
 
         return $controller;
     }
@@ -33,11 +34,11 @@ class OperationController implements ControllerProviderInterface
      */
     public function indexAction(Application $app)
     {
-        $operationModel = new Expenses();
+        $operationRepository = new OperationRepository($app['db']);
 
         return $app['twig']->render(
             'operation/index.html.twig',
-            ['operation' => $operationModel->findAll()]
+            ['operation' => $operationRepository->findAll()]
         );
     }
 
@@ -46,11 +47,12 @@ class OperationController implements ControllerProviderInterface
      */
     public function viewAction(Application $app, $id)
     {
-        $operationModel = new Expenses();
+        $operationRepository = new OperationRepository($app['db']);
 
         return $app['twig']->render(
             'operation/view.html.twig',
-            ['operation' => $operationModel->findOneById($id)]
+            ['operation' => $operationRepository->findOneById($id)]
         );
     }
+
 }

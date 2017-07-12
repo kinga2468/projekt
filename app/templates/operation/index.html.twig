@@ -49,7 +49,7 @@
                 {% if operation|length %}
                     {% for row in operation %}
                         <div class="kategoria k">
-                            <p class="nazwa">{{ row.title|upper }}, {{ row.value }}</p>
+                            <p class="nazwa">{{ row.name|upper }}, {{ row.value }}</p>
                             <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
                         </div>
                     {% endfor %}

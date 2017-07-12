@@ -17,7 +17,7 @@ class Categories
         [
             'id' => 1,
             'icon' =>'fa fa-money',
-            'title' => 'Wpłaty',
+            'title' => 'Wpł',
         ],
         [
             'id' => 2,

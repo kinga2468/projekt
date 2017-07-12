@@ -1,15 +1,15 @@
 <?php
 /**
- * Month repository.
+ * Operation repository.
  */
 namespace Repository;
 
 use Doctrine\DBAL\Connection;
 
 /**
- * Class MonthRepository.
+ * Class OperationRepository.
  */
-class MonthRepository
+class OperationRepository
 {
     /**
      * Doctrine DBAL connection.
@@ -17,7 +17,7 @@ class MonthRepository
     protected $db;
 
     /**
-     * MonthRepository constructor.
+     * OperationRepository constructor.
      */
     public function __construct(Connection $db)
     {
@@ -40,7 +40,7 @@ class MonthRepository
     public function findOneById($id)
     {
         $queryBuilder = $this->queryAll();
-        $queryBuilder->where('m.id = :id')
+        $queryBuilder->where('o.id = :id')
             ->setParameter(':id', $id, \PDO::PARAM_INT);
         $result = $queryBuilder->execute()->fetch();
 
@@ -49,14 +49,12 @@ class MonthRepository
 
     /**
      * Query all records.
-     *
-     * @return \Doctrine\DBAL\Query\QueryBuilder Result
      */
     protected function queryAll()
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
-        return $queryBuilder->select('m.id', 'm.name', 'm.date_from', 'm.date_to', 'm.limit') //tu piszemy co selectujemy z bazy !!!!!
-            ->from('month', 'm');
+        return $queryBuilder->select('o.id', 'o.name', 'o.value')
+            ->from('operation', 'o');
     }
 }

@@ -4,10 +4,11 @@
  */
 namespace Controller;
 
-use Model\Categories\Arr\Categories;
+//use Model\Categories\Arr\Categories;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Repository\CategorieRepository;
+//use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CategorieController.
@@ -22,8 +23,8 @@ class CategorieController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/', [$this, 'indexAction']);
-        $controller->get('/{id}', [$this, 'viewAction']);
+        $controller->get('/', [$this, 'indexAction'])->bind('categorie_index');
+        $controller->get('/{id}', [$this, 'viewAction'])->bind('categorie_view');
 
         return $controller;
     }
@@ -33,11 +34,11 @@ class CategorieController implements ControllerProviderInterface
      */
     public function indexAction(Application $app)
     {
-        $categorieModel = new Categories();
+        $categorieRepository = new CategorieRepository($app['db']);
 
         return $app['twig']->render(
             'categorie/index.html.twig',
-            ['categorie' => $categorieModel->findAll()]
+            ['categorie' => $categorieRepository->findAll()]
         );
     }
 
@@ -46,11 +47,12 @@ class CategorieController implements ControllerProviderInterface
      */
     public function viewAction(Application $app, $id)
     {
-        $categorieModel = new Categories();
+        $categorieRepository = new CategorieRepository($app['db']);
 
         return $app['twig']->render(
             'categorie/view.html.twig',
-            ['categorie' => $categorieModel->findOneById($id)]
+            ['categorie' => $categorieRepository->findOneById($id)]
         );
     }
+
 }
