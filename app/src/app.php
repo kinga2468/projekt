@@ -9,7 +9,6 @@ use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\LocaleServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
-use Silex\Provider\DoctrineServiceProvider;
 
 $app = new Application();
 
@@ -43,21 +42,5 @@ $app->extend('translator', function ($translator, $app) {
     return $translator;
 });
 
-$app->register(
-    new DoctrineServiceProvider(),
-    [
-        'db.options' => [
-            'driver'    => 'pdo_mysql',
-            'host'      => 'localhost',
-            'dbname'    => 'projekt',
-            'user'      => 'user',
-            'password'  => 'user',
-            'charset'   => 'utf8',
-            'driverOptions' => [
-                1002 => 'SET NAMES utf8',
-            ],
-        ],
-    ]
-);
 
 return $app;

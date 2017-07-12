@@ -4,11 +4,10 @@
  */
 namespace Controller;
 
-//use Model\Budgets\Arr\Budgets;
+use Model\Budgets\Arr\Budgets;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
-use Repository\MonthRepository;
-//use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class MonthController.
@@ -38,11 +37,11 @@ class MonthController implements ControllerProviderInterface
      */
     public function indexAction(Application $app)
     {
-        $monthRepository = new MonthRepository($app['db']);
+        $budgetsModel = new Budgets();
 
         return $app['twig']->render(
             'history/index.html.twig',
-            ['month' => $monthRepository->findAll()]
+            ['budgets' => $budgetsModel->findAll()]
         );
     }
 
@@ -51,11 +50,11 @@ class MonthController implements ControllerProviderInterface
      */
     public function viewAction(Application $app, $id)
     {
-        $monthRepository = new MonthRepository($app['db']);
+        $budgetsModel = new Budgets();
 
         return $app['twig']->render(
             'history/view.html.twig',
-            ['month' => $monthRepository->findOneById($id)]
+            ['budgets' => $budgetsModel->findOneById($id)]
         );
     }
 
