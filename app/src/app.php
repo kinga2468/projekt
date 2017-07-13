@@ -10,6 +10,8 @@ use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\LocaleServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
+use Silex\Provider\FormServiceProvider;
+use Silex\Provider\ValidatorServiceProvider;
 
 $app = new Application();
 
@@ -18,6 +20,10 @@ $app->register(new AssetServiceProvider());
 $app->register(new ServiceControllerServiceProvider()); //żeby móc używać dev
 
 $app->register(new HttpFragmentServiceProvider()); //żeby nie wyskakiwał error 500 czy dev
+
+$app->register(new FormServiceProvider());
+
+$app->register(new ValidatorServiceProvider());
 
 $app->register(
     new TwigServiceProvider(),

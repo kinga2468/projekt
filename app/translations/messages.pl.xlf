@@ -10,6 +10,22 @@
                  <source>title.history</source>
                  <target>Historia</target>
             </trans-unit>
+            <trans-unit id="title.month_add">
+                   <source>title.month_add</source>
+                   <target>Dodaj nowy</target>
+             </trans-unit>
+             <trans-unit id="action.save">
+                   <source>action.save</source>
+                   <target>Zapisz</target>
+             </trans-unit>
+             <trans-unit id="label.name">
+                    <source>label.name</source>
+                     <target>Nazwa: </target>
+              </trans-unit>
+             <trans-unit id="label.limit">
+                      <source>label.limit</source>
+                       <target>Limit: </target>
+             </trans-unit>
         </body>
     </file>
 </xliff>
