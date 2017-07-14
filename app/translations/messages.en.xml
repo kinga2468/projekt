@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="title.budget">
+                <source>title.budget</source>
+                <target>Home Budget Management</target>
+            </trans-unit>
+            <trans-unit id="title.history">
+                <source>title.history</source>
+                <target>History</target>
+            </trans-unit>
+            <trans-unit id="title.add">
+                <source>title.add</source>
+                <target>Add new</target>
+            </trans-unit>
+            <trans-unit id="action.save">
+                <source>action.save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="label.name">
+                <source>label.name</source>
+                <target>Name: </target>
+            </trans-unit>
+            <trans-unit id="label.limit">
+                <source>label.limit</source>
+                <target>Limit: </target>
+            </trans-unit>
+            <trans-unit id="message.element_successfully_added">
+                <source>message.element_successfully_added</source>
+                <target>Element successfully added</target>
+            </trans-unit>
+            <trans-unit id="add.categorie">
+                <source>add.categorie</source>
+                <target>Add Category</target>
+            </trans-unit>
+            <trans-unit id="back.to.list">
+                <source>back.to.list</source>
+                <target>Return</target>
+            </trans-unit>
+            <trans-unit id="title.categorie_edit">
+                <source>title.categorie_edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="message.element_successfully_edited">
+                <source>message.element_successfully_edited</source>
+                <target>Element successfully edited</target>
+            </trans-unit>
+            <trans-unit id="message.record_not_found">
+                <source>message.record_not_found</source>
+                <target>Record not found</target>
+            </trans-unit>
+            <trans-unit id="index_categorie_edit">
+                <source>index_categorie_edit</source>
+                <target>edit  |</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

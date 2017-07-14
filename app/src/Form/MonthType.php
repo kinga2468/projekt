@@ -73,4 +73,5 @@ class MonthType extends AbstractType
     {
         return 'month_type';
     }
+
 }

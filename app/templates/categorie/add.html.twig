@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block body %}
+    <div class="main-container">
+        <header>
+            {% block header %}
+                <div class="logo">
+                    <a href="log.html">Budżet domowy</a>
+                </div>
+                <div class="witaj">
+                    <p class="wyloguj"><a title="Wyloguj" href="notlog.html">Wyloguj</a></p><p class="imie">Witaj _____, </p>
+                </div>
+                <div class="history">
+                    <p><a titile="Historia" href="">Nowa kategoria</a></p>
+                </div>
+            {% endblock %}
+        </header>
+        <div class="akcje">
+            <h1>{{ 'title.add'|trans }}</h1>
+            <div class="form">
+                {{ form_start(form, { method: 'post', action: url('categorie_add') }) }}
+                {{ form_widget(form) }}
+            </div>
+            <input type="submit" value="{{ 'action.save'|trans }}" class="zapisz" />
+            {{ form_end(form) }}
+            <a class ="wroc" href="{{ url('categorie_index') }}" title="{{ 'back.to.list'|trans }}">
+                {{ 'back.to.list'|trans }}
+            </a>
+        </div>
+        <footer>
+            {% block footer %}
+                <p>Projekt z systemu interaktywnego EPI 2017. Projekt i realizacja: Kinga Bożęcka</p>
+            {% endblock %}
+        </footer>
+    </div>
+{% endblock %}

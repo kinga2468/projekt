@@ -17,7 +17,7 @@ class CategorieRepository
      *
      * const int NUM_ITEMS
      */
-    const NUM_ITEMS = 1;
+    const NUM_ITEMS = 10;
     /**
      * Doctrine DBAL connection.
      */
@@ -67,10 +67,6 @@ class CategorieRepository
 
     /**
      * Get records paginated.
-     *
-     * @param int $page Current page number
-     *
-     * @return array Result
      */
     public function findAllPaginated($page = 1)
     {
@@ -88,8 +84,6 @@ class CategorieRepository
 
     /**
      * Count all pages.
-     *
-     * @return int Result
      */
     protected function countAllPages()
     {
@@ -108,5 +102,30 @@ class CategorieRepository
         }
 
         return $pagesNumber;
+    }
+
+    /**
+     * Save record.
+     */
+    public function save($categorie)
+    {
+        if (isset($categorie['id']) && ctype_digit((string) $categorie['id'])) {
+            // update record
+            $id = $categorie['id'];
+            unset($categorie['id']);
+
+            return $this->db->update('categorie', $categorie, ['id' => $id]);
+        } else {
+            // add new record
+            return $this->db->insert('categorie', $categorie); // pierwsze categorie to nazwa tabeli
+        }
+    }
+
+    /**
+     * Remove record.
+     */
+    public function delete($categorie)
+    {
+        return $this->db->delete('categorie'/*tabele categorie*/, ['id' => $categorie['id']]);
     }
 }

@@ -12,18 +12,15 @@ use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
+use Silex\Provider\SessionServiceProvider;
 
 $app = new Application();
-
 $app->register(new AssetServiceProvider());
-
 $app->register(new ServiceControllerServiceProvider()); //żeby móc używać dev
-
 $app->register(new HttpFragmentServiceProvider()); //żeby nie wyskakiwał error 500 czy dev
-
 $app->register(new FormServiceProvider());
-
 $app->register(new ValidatorServiceProvider());
+$app->register(new SessionServiceProvider());
 
 $app->register(
     new TwigServiceProvider(),
@@ -41,10 +38,10 @@ $app->register(
     ]
 );
 $app->extend('translator', function ($translator, $app) {
-    $translator->addResource('xliff', __DIR__.'/../translations/messages.en.xlf', 'en', 'messages');
-    $translator->addResource('xliff', __DIR__.'/../translations/validators.en.xlf', 'en', 'validators');
-    $translator->addResource('xliff', __DIR__.'/../translations/messages.pl.xlf', 'pl', 'messages');
-    $translator->addResource('xliff', __DIR__.'/../translations/validators.pl.xlf', 'pl', 'validators');
+    $translator->addResource('xliff', __DIR__.'/../translations/messages.en.xml', 'en', 'messages');
+    $translator->addResource('xliff', __DIR__.'/../translations/validators.en.xml', 'en', 'validators');
+    $translator->addResource('xliff', __DIR__.'/../translations/messages.pl.xml', 'pl', 'messages');
+    $translator->addResource('xliff', __DIR__.'/../translations/validators.pl.xml', 'pl', 'validators');
 
     return $translator;
 });
@@ -59,6 +56,7 @@ $app->register(
             'user'      => 'user',
             'password'  => 'user',
             'charset'   => 'utf8',
+            'collate' => 'utf8mb4_unicode_ci',
             'driverOptions' => [
                 1002 => 'SET NAMES utf8',
             ],

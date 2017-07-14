@@ -36,7 +36,11 @@
                     <p class="wprzycisk"><a title="dodaj wydatek" href="#">Dodaj kwote</a></p>
                 </div>
                 <div class="stworz_kategorie">
-                    <p class="wprzycisk"><a title="stwórz kategorie" href="#">Stwórz kategorie</a></p>
+                    <p class="wprzycisk">
+                        <a href="{{ url('categorie_add') }}" title="{{ 'add.categorie'|trans }}">
+                            {{ 'add.categorie'|trans }}
+                        </a>
+                    </p>
                 </div>
             </div>
             <div class="zostalo">
@@ -46,12 +50,20 @@
                 </form>
             </div>
             <div class="kategorie">
+                <div class="message">
+                    {% include 'default/_flash_messages.html.twig' %}
+                </div>
                 {% if paginator.data|length %}
                     {% for row in paginator.data %}
                         <div class="kategoria k">
                             <span class="{{ row.icon }}"></span>
                             <p class="nazwa">{{ row.name|upper }}</p>
-                            <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
+                            <a class="edit" href="{{ url('categorie_delete', {'id': row.id}) }}" title="{{ 'index_categorie_delete'|trans }}">
+                                <span class="fa fa-times-circle"></span>
+                            </a>
+                            <a class="edit" href="{{ url('categorie_edit', {'id': row.id}) }}" title="{{ 'index_categorie_edit'|trans }}">
+                                {{ 'index_categorie_edit'|trans }}
+                            </a>
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -85,7 +97,7 @@
             <div class="paginacja">
                 {% include 'default/_paginator.html.twig' with {
                 paginator: paginator,
-                route_name: 'month_index_paginated',} %}
+                route_name: 'categorie_index_paginated',} %}
             </div>
         </div>
         <footer>

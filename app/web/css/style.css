@@ -74,7 +74,8 @@ a{text-decoration:none; color:black;}
 .kategoria{border-bottom: solid; height:50px; font-size:1.2em;}
 .kategoria .fa{float:left; margin: 16px 15px;}
 .kategoria .nazwa{float:left; padding: 13px 8px 8px 10px; }
-.k .fa-times-circle{float:right; margin: 17px 20px 0 0;}
+.edit{float:right; margin:13px 12px 0 0;}
+.k .fa-times-circle{float:right; margin: 4px 2px 0 0 ;}
 
 .operacje{background-color:#A39A83; margin:130px 50px 0 50px ;}
 /*inne kolory #D8DFEF     */
@@ -83,14 +84,26 @@ a{text-decoration:none; color:black;}
 .prev{float:left; margin:15px 0 15px 55px;}
 .next{float:right; margin:15px 55px 15px 0;}
 footer{margin-top:50px;}
+.message{color:red; background-color:#EDEDEA; }
+
+/*podstrona edit, add i delete*/
+.akcje h1{text-align: center; margin:10px 0 0 0; font-size:22px; }
+.akcje{width:500px; margin: 0 auto;}
+.akcje .form{width:350px; margin:20px auto 0; font-size:20px;}
+.akcje .form input{float:right; width:250px; height:20px; margin:2px 0 0 10px; font-size:15px;}
+.zapisz{display:block; margin:20px auto 0; height:auto; font-family: Dosis, helvetica, arial, sans-serif;
+    cursor:pointer; border:none; padding: 7px 12px; font-size:20px;  background-color:#7AC402; }
+.wroc{font-size:20px; margin:5px;}
+
+
 
 
 /*podstrona signin.html*/
 .register{width:470px; margin:20px auto 0; font-size:20px;  height:400px;}
 .register input{margin:10px 0 10px 90px; width:250px; height:20px;}
 .register input.npassword{margin:10px 0 10px 26px;}
-.register input.wyslij{display:block; margin:20px auto 0; height:auto; width:auto; font-family: Dosis;cursor:pointer; border:none;
-    padding:7px 17px 8px; font-size:22px;  background-color:#7AC402; }
+.register input.wyslij{display:block; margin:20px auto 0; height:auto; font-family: Dosis, helvetica, arial, sans-serif;
+    cursor:pointer; border:none;  padding:7px 17px 8px; font-size:22px;  background-color:#7AC402;  width:auto;}
 
 /*podstrona z historią */
 .link{float:right; margin: 12px 20px 0 0;}

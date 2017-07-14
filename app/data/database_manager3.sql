@@ -31,6 +31,9 @@ CREATE TABLE IF NOT EXISTS `role` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
 ENGINE = InnoDB;
 
+INSERT INTO `role` VALUES (NULL, 'admin');
+INSERT INTO `role` VALUES (NULL, 'user');
+
 ALTER TABLE `role` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 -- -----------------------------------------------------
 -- Table `user`
@@ -94,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `month` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO `month` VALUES (NULL, 'listopad 2017', 2017-11-01, 2017-11-30, 3002, 1);
 ALTER TABLE `month` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 -- -----------------------------------------------------
 -- Table `operation`
