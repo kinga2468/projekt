@@ -85,19 +85,20 @@ CREATE TABLE IF NOT EXISTS `month` (
   `name` VARCHAR(128) NOT NULL,
   `date_from` DATETIME NOT NULL,
   `date_to` DATETIME NOT NULL,
-  `limit` DECIMAL(12,2) NOT NULL,
+  `upper_limit` DECIMAL(12,2) NOT NULL,
+  `remained` DECIMAL(12,2) NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `fk_month_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_month_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
+  FOREIGN KEY (`user_id`)
+  REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
 
-INSERT INTO `month` VALUES (NULL, 'listopad 2017', 2017-11-01, 2017-11-30, 3002, 1);
+update month set remained = upper_limit;
 ALTER TABLE `month` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 -- -----------------------------------------------------
 -- Table `operation`
