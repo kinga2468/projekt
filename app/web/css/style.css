@@ -21,18 +21,6 @@ header{width:100%; padding:10px 0; background-color:#EDEDEA; height:130px;}
     margin: 35px;
     text-transform:uppercase;
 }
-/*
-.loguj{float:right; width:30%;  margin:0 20px 5px; }
-.logowanie fieldset{border:0;}
-.logowanie legend span{font-weight:700; font-size:1.3em; color:#8F5431; padding:0 2px;}
-.logowanie section{overflow:hidden; margin:4px 0;}
-.label_name{font-weight:400; color:#555; padding:20px 2px;}
-.logowanie section input{float:right; width:11em; color:#555; font-size:.8em; margin:3px;
-    outline:none; border:2px solid #555; font-family: Dosis, helvetica, arial, sans-serif;}
-.logowanie section input.zaloguj{float:right; width:auto; margin:10px 2px 3px 0; padding:0px 8px 3px; font-size:1em;
-    font-weight:800; cursor:pointer;  color:#fff; border:none; background-color:#7AC402; }
-.logowanie section p a{color:#555; text-decoration:none; padding: 0 2px;}
-.logowanie section p a:hover{color:#333; text-decoration:underline;}*/
 
 .loguj{float:right; width:30%;  margin:0 20px 5px; }
 .logowanie fieldset{border:0;}

@@ -12,7 +12,12 @@
                     <a href="log.html">Budżet domowy</a>
                 </div>
                 <div class="witaj">
-                    <p class="wyloguj"><a title="Wyloguj" href="notlog.html">Wyloguj</a></p><p class="imie">Witaj _____, </p>
+                    <p class="wyloguj">
+                        <a href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
+                            {{ 'auth.logout.label'|trans }}
+                        </a>
+                    </p>
+                    <p class="imie">Witaj _____, </p>
                 </div>
                 <div class="history">
                     <p><a titile="Historia" href="">Nowy miesiąc</a></p>

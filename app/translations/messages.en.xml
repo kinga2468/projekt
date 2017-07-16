@@ -94,6 +94,22 @@
                 <source>submit.new_budget</source>
                 <target>Create your budget</target>
             </trans-unit>
+            <trans-unit id="action.delete">
+                <source>action.delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="title.categorie_delete">
+                <source>title.categorie_delete</source>
+                <target>Category delete</target>
+            </trans-unit>
+            <trans-unit id="message.element_successfully_deleted">
+                <source>message.element_successfully_deleted</source>
+                <target>Element successfully deleted</target>
+            </trans-unit>
+            <trans-unit id="title.delete">
+                <source>title.delete</source>
+                <target>Delete</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

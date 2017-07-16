@@ -82,14 +82,14 @@ $app->register(
                 'form' => [
                     'login_path' => 'auth_login',
                     'check_path' => 'auth_login_check',
-                    'default_target_path' => 'categorie_index',
+                    'default_target_path' => 'month_index',
                     'username_parameter' => 'login_type[login]',
                     'password_parameter' => 'login_type[password]',
                 ],
                 'anonymous' => true,
                 'logout' => [
                     'logout_path' => 'auth_logout',
-                    'target_url' => 'categorie_index',
+                    'target_url' => 'month_index',
                 ],
                 'users' => function () use ($app) {
                     return new Provider\UserProvider($app['db']);
@@ -99,6 +99,7 @@ $app->register(
         'security.access_rules' => [
             ['^/auth.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],
             ['^/.+$', 'ROLE_ADMIN'],
+            ['^.*$', 'ROLE_USER'],
         ],
         'security.role_hierarchy' => [
             'ROLE_ADMIN' => ['ROLE_USER'],

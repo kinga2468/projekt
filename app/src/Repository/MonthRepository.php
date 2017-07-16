@@ -62,7 +62,7 @@ class MonthRepository
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
-        return $queryBuilder->select('m.id', 'm.name', 'm.date_from', 'm.date_to', 'm.limit') //tu piszemy co selectujemy z bazy !!!!!
+        return $queryBuilder->select('m.id', 'm.name', 'm.date_from', 'm.date_to', 'm.upper_limit') //tu piszemy co selectujemy z bazy !!!!!
             ->from('month', 'm');
     }
 
