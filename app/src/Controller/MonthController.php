@@ -7,8 +7,8 @@ namespace Controller;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 use Repository\MonthRepository;
-use Form\MonthType;
-use Symfony\Component\HttpFoundation\Request;
+//use Form\MonthType;
+//use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -31,9 +31,6 @@ class MonthController implements ControllerProviderInterface
         $controller->get('/{id}', [$this, 'viewAction'])
             ->assert('id', '[1-9]\d*')
             ->bind('month_view');
-        $controller->match('/add', [$this, 'addAction'])
-            ->method('POST|GET')
-            ->bind('month_add');
 
         return $controller;
     }
@@ -63,29 +60,4 @@ class MonthController implements ControllerProviderInterface
         );
     }
 
-    /**
-     * Add action.
-     */
-    public function addAction(Application $app, Request $request)
-    {
-        $month = [];
-
-        $form = $app['form.factory']->createBuilder(MonthType::class, $month)->getForm();
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $monthRepository = new MonthRepository($app['db']);
-            $monthRepository->save($form->getData());
-
-            return $app->redirect($app['url_generator']->generate('month_index'), 301);
-        }
-
-        return $app['twig']->render(
-            'history/add.html.twig',
-            [
-                'month' => $month,
-                'form' => $form->createView(),
-            ]
-        );
-    }
 }

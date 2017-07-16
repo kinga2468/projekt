@@ -31,8 +31,9 @@ CREATE TABLE IF NOT EXISTS `role` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
 ENGINE = InnoDB;
 
-INSERT INTO `role` VALUES (NULL, 'admin');
-INSERT INTO `role` VALUES (NULL, 'user');
+INSERT INTO `role` (`id`, `name`) VALUES
+  (NULL, 'ROLE_ADMIN'),
+  (NULL, 'ROLE_USER');
 
 ALTER TABLE `role` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 -- -----------------------------------------------------
@@ -45,14 +46,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `role_id` INT NOT NULL,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `login_UNIQUE` (`login` ASC),
-  INDEX `fk_user_role1_idx` (`role_id` ASC),
-  CONSTRAINT `fk_user_role1`
-    FOREIGN KEY (`role_id`)
-    REFERENCES `role` (`id`)
+  INDEX `IX_user_1` (`role_id` ASC),
+  UNIQUE INDEX `UQ_user_1` (`login` ASC),
+  CONSTRAINT `FK_user_1`
+  FOREIGN KEY (`role_id`)
+  REFERENCES `role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
 
 ALTER TABLE `user` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 -- -----------------------------------------------------

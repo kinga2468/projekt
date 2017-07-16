@@ -6,7 +6,7 @@ body{font-family: Dosis, helvetica, arial, sans-serif;
 .main-container{width:980px; margin:0 auto; background-color: #EDEDEA;}
 header{width:100%; padding:10px 0; background-color:#EDEDEA; height:130px;}
 .all{clear:both; width:100%; background-size: 100%; background-repeat: no-repeat;
-    background-image: url("../images/tło.jpeg"); padding:50px 0 170px 0; }
+    background-image: url("../images/background.jpeg"); padding:50px 0 170px 0; }
 
 .logo{
     float:left;
@@ -21,18 +21,31 @@ header{width:100%; padding:10px 0; background-color:#EDEDEA; height:130px;}
     margin: 35px;
     text-transform:uppercase;
 }
-
+/*
 .loguj{float:right; width:30%;  margin:0 20px 5px; }
 .logowanie fieldset{border:0;}
 .logowanie legend span{font-weight:700; font-size:1.3em; color:#8F5431; padding:0 2px;}
 .logowanie section{overflow:hidden; margin:4px 0;}
-.logowanie section label{font-weight:400; color:#555; padding:8px 2px;}
+.label_name{font-weight:400; color:#555; padding:20px 2px;}
 .logowanie section input{float:right; width:11em; color:#555; font-size:.8em; margin:3px;
-    outline:none; border:2px solid #555; font-family: Dosis, helvetica, arial, sans-serif; }
+    outline:none; border:2px solid #555; font-family: Dosis, helvetica, arial, sans-serif;}
 .logowanie section input.zaloguj{float:right; width:auto; margin:10px 2px 3px 0; padding:0px 8px 3px; font-size:1em;
     font-weight:800; cursor:pointer;  color:#fff; border:none; background-color:#7AC402; }
 .logowanie section p a{color:#555; text-decoration:none; padding: 0 2px;}
+.logowanie section p a:hover{color:#333; text-decoration:underline;}*/
+
+.loguj{float:right; width:30%;  margin:0 20px 5px; }
+.logowanie fieldset{border:0;}
+.logowanie legend span{font-weight:700; font-size:1.3em; color:#8F5431; padding:0 0 5px 0;}
+.logowanie section{overflow:hidden; margin:7px 0 4px;}
+.logowanie section input {float:right;}
+.logowanie section input.zaloguj{float:right; width:auto; margin:10px 2px 3px 0; padding:5px 8px; font-size:1em;
+    font-weight:600; cursor:pointer;  color:#fff; border:none; background-color:#7AC402; }
+.logowanie section p a{color:#555; text-decoration:none; padding: 0 2px;}
 .logowanie section p a:hover{color:#333; text-decoration:underline;}
+
+
+
 
 .zaloz_budzet{clear:both; margin:0 0 60px 0; opacity:0.9;}
 .zaloz_budzet input {display:block; margin:0 auto; background: #663C23; width:250px; padding:30px 20px; color:white;
@@ -86,6 +99,7 @@ a{text-decoration:none; color:black;}
 footer{margin-top:50px;}
 .message{color:red; background-color:#EDEDEA; }
 
+
 /*podstrona edit, add i delete*/
 .akcje h1{text-align: center; margin:10px 0 0 0; font-size:22px; }
 .akcje{width:500px; margin: 0 auto;}
@@ -104,6 +118,8 @@ footer{margin-top:50px;}
 .register input.npassword{margin:10px 0 10px 26px;}
 .register input.wyslij{display:block; margin:20px auto 0; height:auto; font-family: Dosis, helvetica, arial, sans-serif;
     cursor:pointer; border:none;  padding:7px 17px 8px; font-size:22px;  background-color:#7AC402;  width:auto;}
+.stopka{margin:0;}
+
 
 /*podstrona z historią */
 .link{float:right; margin: 12px 20px 0 0;}

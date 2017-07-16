@@ -106,20 +106,4 @@ class MonthRepository
         return $pagesNumber;
     }
 
-    /**
-     * Save record.
-     */
-    public function save($month)
-    {
-        if (isset($month['id']) && ctype_digit((string) $month['id'])) {
-            // update record
-            $id = $month['id'];
-            unset($month['id']);
-
-            return $this->db->update('month', $month, ['id' => $id]);
-        } else {
-            // add new record
-            return $this->db->insert('month', $month);
-        }
-    }
 }

@@ -21,6 +21,7 @@ $app->register(new HttpFragmentServiceProvider()); //żeby nie wyskakiwał error
 $app->register(new FormServiceProvider());
 $app->register(new ValidatorServiceProvider());
 $app->register(new SessionServiceProvider());
+use Silex\Provider\SecurityServiceProvider;
 
 $app->register(
     new TwigServiceProvider(),
@@ -63,9 +64,48 @@ $app->register(
         ],
     ]
 );
-
+/*ustawić ut-8 */
 $dbh = new PDO ('mysql:host=localhost; dbname=projekt2', 'user', 'user');
 $dbh -> query ('SET NAMES utf8');
 $dbh -> query ('SET CHARACTER_SET utf8_unicode_ci');
+
+$app->register(
+    new SecurityServiceProvider(),
+    [
+        'security.firewalls' => [
+            'dev' => [
+                'pattern' => '^/(_(profiler|wdt)|css|images|js)/',
+                'security' => false,
+            ],
+            'main' => [
+                'pattern' => '^.*$',
+                'form' => [
+                    'login_path' => 'auth_login',
+                    'check_path' => 'auth_login_check',
+                    'default_target_path' => 'categorie_index',
+                    'username_parameter' => 'login_type[login]',
+                    'password_parameter' => 'login_type[password]',
+                ],
+                'anonymous' => true,
+                'logout' => [
+                    'logout_path' => 'auth_logout',
+                    'target_url' => 'categorie_index',
+                ],
+                'users' => function () use ($app) {
+                    return new Provider\UserProvider($app['db']);
+                },
+            ],
+        ],
+        'security.access_rules' => [
+            ['^/auth.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+            ['^/.+$', 'ROLE_ADMIN'],
+        ],
+        'security.role_hierarchy' => [
+            'ROLE_ADMIN' => ['ROLE_USER'],
+        ],
+    ]
+);
+
+//dump($app['security.encoder.bcrypt']->encodePassword('test-admin', ''));
 
 return $app;

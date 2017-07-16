@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'home_page'|trans }}
+{% endblock %}
+
+{% block body %}
+    <div class="main-container">
+        <header>
+            {% block header %}
+                <div class="logo">
+                    <a href="notlog.html">{{ 'label.logo' |trans}}</a>
+                </div>
+                <div class="loguj">
+                    <div class="logowanie">
+                        <fieldset>
+                            <legend><span>{{ 'title.auth_login'|trans }}</span></legend>
+                            {% if error is defined and error|length %}
+                                {% include 'default/_single_alert_message.html.twig' with {
+                                is_single_message: true,
+                                is_dismissible: false,
+                                type: 'danger',
+                                message: error,
+                                } %}
+                            {% endif %}
+                            <section>
+                                {{ form_start (form, { method: 'post', action: path('auth_login_check') })}}
+                                {{ form_widget(form) }}
+                            </section>
+                            <section>
+                                <input class="zaloguj" type="submit" value="{{ 'action.login'|trans }}"/>{{ form_end(form) }}
+                                <p class="signup"><a title="Zarejestruj się" href="signin.html">Zarejestruj się</a></p>
+                                <p class="signup"><a title="Nie pamiętasz hasła?" href="#">Nie pamiętasz hasła?</a></p>
+                            </section>
+                        </fieldset>
+                    </div>
+                </div>
+            {% endblock %}
+        </header>
+        <div class="all">
+            <form class="zaloz_budzet" method="post" action="#">
+                <input type="submit" value="{{ 'submit.new_budget'|trans }}" />
+            </form>
+            <div class="first">
+                <p>{{ 'first.text'|trans }}</p>
+            </div>
+        </div>
+        <footer class="stopka">
+            {% block footer %}
+                <p>{{ 'footer.text'|trans }}</p>
+            {% endblock %}
+        </footer>
+    </div>
+{% endblock %}

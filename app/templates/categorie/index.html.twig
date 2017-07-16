@@ -12,7 +12,18 @@
                 <a href="log.html">Budżet domowy</a>
             </div>
             <div class="witaj">
-                <p class="wyloguj"><a title="Wyloguj" href="notlog.html">Wyloguj</a></p><p class="imie">Witaj _____, </p>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <p class="wyloguj">
+                    <a href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
+                        {{ 'auth.logout.label'|trans }}
+                    </a>
+                </p>
+                    <p class="imie">Witaj _____, </p>
+                    {#{% else %}
+                    <a class="btn btn-default" href="{{ url('auth_login') }}" title="{{ 'auth.login.label'|trans }}">
+                        {{ 'auth.login.label'|trans }}
+                    </a>#}
+                {% endif %}
             </div>
             <div class="historia">
                 <p><a title="Historia" href="#">Historia</a></p>

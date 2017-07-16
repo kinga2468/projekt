@@ -54,6 +54,49 @@
                 <source>index_categorie_edit</source>
                 <target>edytuj  |</target>
             </trans-unit>
+            <trans-unit id="auth.logout.label">
+                <source>auth.logout.label</source>
+                <target>Wyloguj</target>
+            </trans-unit>
+            <trans-unit id="title.auth_login">
+                <source>title.auth_login</source>
+                <target>Logowanie</target>
+            </trans-unit>
+            <trans-unit id="action.login">
+                <source>action.login</source>
+                <target>Zaloguj</target>
+            </trans-unit>
+            <trans-unit id="label.login">
+                <source>label.login</source>
+                <target>Login: </target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Hasło: </target>
+            </trans-unit>
+            <trans-unit id="home_page">
+                <source>home_page</source>
+                <target>Strona główna</target>
+            </trans-unit>
+            <trans-unit id="label.logo">
+                <source>label.logo</source>
+                <target>Budżet domowy</target>
+            </trans-unit>
+            <trans-unit id="footer.text">
+                <source>footer.text</source>
+                <target>Projekt z systemu interaktywnego EPI 2017. Projekt i realizacja: Kinga Bożęcka</target>
+            </trans-unit>
+            <trans-unit id="first.text">
+                <source>first.text</source>
+                <target>Budżet Domowy to program dla tych wszystkich zainteresowanych równoważeniem budżetu i finansów rodziny.
+                    Jeżeli masz wrażenie, że Twoje pieniądze przeciekają Tobie przez palce, teraz możesz odzyskać kontrolę
+                    nad finansami.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </target>
+            </trans-unit>
+            <trans-unit id="submit.new_budget">
+                <source>submit.new_budget</source>
+                <target>Utwórz swój budżet</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

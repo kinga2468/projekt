@@ -54,6 +54,46 @@
                 <source>index_categorie_edit</source>
                 <target>edit  |</target>
             </trans-unit>
+            <trans-unit id="auth.logout.label">
+                <source>auth.logout.label</source>
+                <target>Logout</target>
+            </trans-unit>
+            <trans-unit id="title.auth_login">
+                <source>title.auth_login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="action.login">
+                <source>action.login</source>
+                <target>Log in</target>
+            </trans-unit>
+            <trans-unit id="label.login">
+                <source>label.login</source>
+                <target>Login: </target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Password: </target>
+            </trans-unit>
+            <trans-unit id="home_page">
+                <source>home_page</source>
+                <target>Home page</target>
+            </trans-unit>
+            <trans-unit id="label.logo">
+                <source>label.logo</source>
+                <target>Home budget</target>
+            </trans-unit>
+            <trans-unit id="footer.text">
+                <source>footer.text</source>
+                <target>Project from the interactive system EPI 2017. Design and implementation: Kinga Bożęcka</target>
+            </trans-unit>
+            <trans-unit id="first.text">
+                <source>first.text</source>
+                <target>Home Budget is a program for all those interested in balancing the budget and family finances. If you have the impression that your money is leaking through your fingers, you can now regain control of your finances. Nowadays you can regain control of your finances. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. Duis aute irure dolor in reprocessit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed to eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. Duis aute irure dolor in reprocessit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</target>
+            </trans-unit>
+            <trans-unit id="submit.new_budget">
+                <source>submit.new_budget</source>
+                <target>Create your budget</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
