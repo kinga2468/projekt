@@ -42,10 +42,10 @@ class UserProvider implements UserProviderInterface
      *
      * @return User Result
      */
-    public function loadUserByUsername($login)
+    public function loadUserByUsername($login)                                     //załaduj użytkownika po jego loginie ?
     {
         $userRepository = new UserRepository($this->db);
-        $user = $userRepository->loadUserByLogin($login);
+        $user = $userRepository->loadUserByLogin($login);                          //w zmiennej user trzymamy dane o użytkowniku
 
         return new User(
             $user['login'],
@@ -57,6 +57,18 @@ class UserProvider implements UserProviderInterface
             true
         );
     }
+
+    /*public function getUser()
+    {
+        $user = null;
+        $token = $app['security.token_storage']->getToken();
+
+        if ($token !== null) {
+            $user = $token->getUser();
+        }
+
+        return $user;
+    }*/
 
     /**
      * Refresh user.

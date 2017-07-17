@@ -18,10 +18,10 @@ $app = new Application();
 $app->register(new AssetServiceProvider());
 $app->register(new ServiceControllerServiceProvider()); //żeby móc używać dev
 $app->register(new HttpFragmentServiceProvider()); //żeby nie wyskakiwał error 500 czy dev
-$app->register(new FormServiceProvider());
-$app->register(new ValidatorServiceProvider());
-$app->register(new SessionServiceProvider());
-use Silex\Provider\SecurityServiceProvider;
+$app->register(new FormServiceProvider());            //do formularzy
+$app->register(new ValidatorServiceProvider());      //do walidacji formularzy
+$app->register(new SessionServiceProvider());          //do sesji
+use Silex\Provider\SecurityServiceProvider;           //do logowania
 
 $app->register(
     new TwigServiceProvider(),
@@ -98,8 +98,7 @@ $app->register(
         ],
         'security.access_rules' => [
             ['^/auth.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],
-            ['^/.+$', 'ROLE_ADMIN'],
-            ['^.*$', 'ROLE_USER'],
+            ['^/.+$', 'ROLE_USER'],
         ],
         'security.role_hierarchy' => [
             'ROLE_ADMIN' => ['ROLE_USER'],
