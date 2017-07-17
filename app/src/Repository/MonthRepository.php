@@ -108,10 +108,6 @@ class MonthRepository
 
     /**
      * Save record.
-     *
-     * @param array $tag Tag
-     *
-     * @return boolean Result
      */
     public function save($month)                                              //zapisywanie do bazy
     {
@@ -126,4 +122,20 @@ class MonthRepository
             return $this->db->insert('month', $month);                       //a jak nie istnieje to dodajemy nowy rekord
         }
     }
+
+    /**
+     * znajdź te miesiące - nazwy limity, które id się zgadza
+     */
+    public function findAllById($id)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+            $queryBuilder->select('m.name')
+            ->from('user', 'u')
+            ->innerJoin('u', 'month', 'm', 'm.user_id = u.id')
+            ->where('u.id = :id')
+            ->setParameter(':id', $id, \PDO::PARAM_INT);
+
+            return $queryBuilder->execute()->fetch();
+    }
+
 }

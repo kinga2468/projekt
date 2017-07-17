@@ -40,15 +40,16 @@ class MonthController implements ControllerProviderInterface      //klasa dla co
     /**
      * Index action.
      */
-    public function indexAction(Application $app, $page = 1)                      //wyświetla wszystko od strony 1
+    public function indexAction(Application $app, $id = 1)                      //wyświetla wszystko od strony 1
     {
         $monthRepository = new MonthRepository($app['db']);                       //działa na bazie danych
 
         return $app['twig']->render(                                              //zwraca
             'history/index.html.twig',                                            //szablon index z katalogu history
-            ['paginator' => $monthRepository->findAllPaginated($page)]            //używa funkcji find all paginated od strony 1
+            ['paginator' => $monthRepository->findAllById($id)]            //używa funkcji find all paginated od strony 1
         );
     }
+
     /**
      * View action.
      */

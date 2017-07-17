@@ -31,8 +31,8 @@
                 </div>
             </div>
             <div class="kategorie2">
-                {% if paginator.data|length %}
-                    {% for row in paginator.data %}
+                {% if paginator|length %}
+                    {% for row in paginator %}
                         <div class="kategoria k">
                             <p class="nazwa">{{ row.name|upper }}</p>
                             <div class="link">

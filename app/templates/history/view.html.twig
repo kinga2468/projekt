@@ -32,9 +32,9 @@
             <div class="miesiac">
                 <a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>
                 <div class="data">
-                    {% if paginator.data|length %}
+                    {% if paginator|length %}
                         <p>
-                            {{ paginator.data.name|upper }}
+                            {{ paginator.name|upper }}
                         </p>
                     {% else %}
                         <p>
