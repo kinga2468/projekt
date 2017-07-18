@@ -37,34 +37,13 @@
                             <p class="nazwa">{{ row.name|upper }}</p>
                             <div class="link">
                                 <a href="{{ url('month_view', {'id': row.id}) }}" title="{{ 'label.view'|trans }}">
-                                    {{ 'zobacz '|trans }}
+                                    {{ 'label.view'|trans }}
                                 </a>|
                                 <a title="Usuń" href="#"> usuń</a>
                             </div>
                         </div>
                     {% endfor %}
                 {% endif %}
-                <!--
-                <div class="kategoria k">
-                    <span class="fa fa-shopping-cart"></span>
-                    <p class="nazwa">ZAKUPY</p>
-                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
-                </div>
-                <div class="kategoria k">
-                    <span class="fa fa-car"></span>
-                    <p class="nazwa">PALIWO</p>
-                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
-                </div>
-                <div class="kategoria k">
-                    <span class="fa fa-credit-card"></span>
-                    <p class="nazwa">RACHUNKI</p>
-                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
-                </div>
-                <div class="kategoria k">
-                    <span class="fa fa-gamepad"></span>
-                    <p class="nazwa">ROZRYWKA</p>
-                    <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
-                </div>-->
             </div>
             <div class="paginacja">
                 {% include 'default/_paginator.html.twig' with {
@@ -78,19 +57,4 @@
             {% endblock %}
         </footer>
     </div>
-
-
-    {#
-    {% if categories|length %}
-        <ul>
-            {% for row in categories %}
-                <li>{{ row.id }}. {{ row.title }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <div>
-            Brak elementów!
-        </div>
-    {% endif %}
-    #}
 {% endblock %}

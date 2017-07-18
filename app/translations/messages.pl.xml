@@ -113,6 +113,10 @@
                 <source>title.delete</source>
                 <target>Usuwanie kategorii</target>
             </trans-unit>
+            <trans-unit id="label.view">
+                <source>label.view</source>
+                <target>zobacz</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

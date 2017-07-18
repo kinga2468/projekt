@@ -110,6 +110,10 @@
                 <source>title.delete</source>
                 <target>Delete</target>
             </trans-unit>
+            <trans-unit id="label.view">
+                <source>label.view</source>
+                <target>View</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
