@@ -5,7 +5,9 @@
 namespace Repository;
 
 use Doctrine\DBAL\Connection;
-use Utils\Paginator;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineDbalAdapter;
+use Pagerfanta\Adapter\ArrayAdapter;
 
 /**
  * Class CategorieRepository.
@@ -17,7 +19,7 @@ class CategorieRepository
      *
      * const int NUM_ITEMS
      */
-    const NUM_ITEMS = 10;
+    const NUM_ITEMS = 5;
     /**
      * Doctrine DBAL connection.
      */
@@ -34,9 +36,9 @@ class CategorieRepository
     /**
      * Fetch all records.
      */
-    public function findAll()
+    public function findAll($tab)
     {
-        $queryBuilder = $this->queryAll();
+        $queryBuilder = $this->queryAll($tab);
 
         return $queryBuilder->execute()->fetchAll();
     }
@@ -44,10 +46,10 @@ class CategorieRepository
     /**
      * Find one record.
      */
-    public function findOneById($id)
+    public function findOneById($id, $tab)
     {
-        $queryBuilder = $this->queryAll();
-        $queryBuilder->where('c.id = :id')
+        $queryBuilder = $this->queryAll($tab);
+        $queryBuilder->where('id = :id')
             ->setParameter(':id', $id, \PDO::PARAM_INT);
         $result = $queryBuilder->execute()->fetch();
 
@@ -57,34 +59,37 @@ class CategorieRepository
     /**
     * Query all records.
     */
-    protected function queryAll()
+    protected function queryAll($tab)
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
-        return $queryBuilder->select('c.id', 'c.name', 'c.icon')
-            ->from('categorie', 'c');
+        return $queryBuilder->select('*')
+            ->from($tab);
     }
 
     /**
      * Get records paginated.
      */
-    public function findAllPaginated($page = 1)
+    public function findAllPaginated($page, $tab)
     {
-        $countQueryBuilder = $this->queryAll()
-            ->select('COUNT(DISTINCT c.id) AS total_results')
-            ->setMaxResults(1);
+        $countQueryBuilderModifier = function ($queryBuilder) {
+            $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
+                ->setMaxResults(1);
+        };
 
-        $paginator = new Paginator($this->queryAll(), $countQueryBuilder);
-        $paginator->setCurrentPage($page);
-        $paginator->setMaxPerPage(self::NUM_ITEMS);
+        $queryBuilder = $this->queryAll($tab);
 
-        return $paginator->getCurrentPageResults();
+        $adapter = new DoctrineDbalAdapter($queryBuilder, $countQueryBuilderModifier);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(self::NUM_ITEMS);
+        $pagerfanta->setCurrentPage($page);
+        return $pagerfanta;
     }
 
 
     /**
      * Count all pages.
-     */
+
     protected function countAllPages()
     {
         $pagesNumber = 1;
@@ -102,7 +107,7 @@ class CategorieRepository
         }
 
         return $pagesNumber;
-    }
+    }*/
 
     /**
      * Save record.

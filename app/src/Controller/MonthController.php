@@ -39,27 +39,31 @@ class MonthController implements ControllerProviderInterface      //klasa dla co
 
     /**
      * Index action.
-     */
-    public function indexAction(Application $app, $id = 1)
+    */
+    public function indexAction(Application $app, $page = 1)
     {
         $monthRepository = new MonthRepository($app['db']);
 
         return $app['twig']->render(
             'history/index.html.twig',
-            ['paginator' => $monthRepository->findAllById($id)]
+            ['paginator' => $monthRepository->findAllPaginated($page, 'month', 'date_to'),
+            //'route_name' => 'month_index_paginated'
+            ]
         );
     }
 
     /**
      * View action.
      */
-    public function viewAction(Application $app, $id)                            //wyświetla konkretną krotkę
+    public function viewAction(Application $app, Request $request)                            //wyświetla konkretną krotkę
     {
         $monthRepository = new MonthRepository($app['db']);
 
+        $id = $request->get('id');
         return $app['twig']->render(
             'history/view.html.twig',
-            ['month' => $monthRepository->findOneById($id)]                      //wykorzystuje funkcje find one by id
+            ['month' => $monthRepository->findOneById($id, 'month'),
+                'id' => $id]
         );
     }
 
@@ -88,5 +92,16 @@ class MonthController implements ControllerProviderInterface      //klasa dla co
             ]
         );
     }
+
+    /*
+    protected function getUserLogin(Application $app)
+    {
+        $token = $app['security.token_storage']->getToken();
+        if (null !== $token) {
+            $user = $token->getUser();
+            $userLogin = $user->getUsername();
+        }
+        return $userLogin;
+    }*/
 
 }

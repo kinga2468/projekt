@@ -114,6 +114,18 @@
                 <source>label.view</source>
                 <target>View</target>
             </trans-unit>
+            <trans-unit id="label.nav.next">
+                <source>label.nav.next</source>
+                <target>Next page</target>
+            </trans-unit>
+            <trans-unit id="label.nav.prev">
+                <source>label.nav.prev</source>
+                <target>Previous page</target>
+            </trans-unit>
+            <trans-unit id="title.edit">
+                <source>title.edit</source>
+                <target>Edit</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -17,7 +17,9 @@
                             {{ 'auth.logout.label'|trans }}
                         </a>
                     </p>
-                    <p class="imie">Witaj _____, </p>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <p class="imie">Witaj {{ app.user.username }},</p>
+                    {% endif %}
                 </div>
                 <div class="history">
                     <p><a titile="Historia" href="">Nowy miesiąc</a></p>

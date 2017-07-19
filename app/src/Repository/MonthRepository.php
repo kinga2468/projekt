@@ -5,7 +5,9 @@
 namespace Repository;
 
 use Doctrine\DBAL\Connection;
-use Utils\Paginator;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineDbalAdapter;
+use Doctrine\DBAL\DBALException;
 /**
  * Class MonthRepository.
  */
@@ -16,7 +18,7 @@ class MonthRepository
      *
      * const int NUM_ITEMS
      */
-    const NUM_ITEMS = 10;                          //ilość wyników wyświetlanych na stronie
+    const NUM_ITEMS = 10;
     /**
      * Doctrine DBAL connection.
      */
@@ -33,24 +35,24 @@ class MonthRepository
     /**
      * Fetch all records.
      */
-    public function findAll()                                    //funckja find all
+    public function findAll($tab)
     {
-        $queryBuilder = $this->queryAll();                       //weź wszystko
+        $queryBuilder = $this->queryAll($tab);
 
-        return $queryBuilder->execute()->fetchAll();             //i wyświetl wszystko
+        return $queryBuilder->execute()->fetchAll();
     }
 
     /**
      * Find one record.
      */
-    public function findOneById($id)                               //funkcja find one by id
+    public function findOneById($id, $tab)
     {
-        $queryBuilder = $this->queryAll();                         //pobierz wszystko z było z query all
-        $queryBuilder->where('m.id = :id')                         //weź te gdzie id_month jest równe id
+        $queryBuilder = $this->queryAll($tab);
+        $queryBuilder->where('id = :id')
             ->setParameter(':id', $id, \PDO::PARAM_INT);
-        $result = $queryBuilder->execute()->fetch();               //wyświetl to co zostało wybrane
+        $result = $queryBuilder->execute()->fetch();
 
-        return !$result ? [] : $result;                            //jeśli nie istnieje result to wyświetl pustą tablice a jak istnieje to result
+        return !$result ? [] : $result;
     }
 
     /**
@@ -58,75 +60,55 @@ class MonthRepository
      *
      * @return \Doctrine\DBAL\Query\QueryBuilder Result
      */
-    protected function queryAll()
+    protected function queryAll($tab)
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
-        return $queryBuilder->select('m.id', 'm.name', 'm.date_from', 'm.date_to', 'm.upper_limit') //tu piszemy co selectujemy z bazy !!!!!
-            ->from('month', 'm');                //i jakim skrótem będzie to opatrzone
+        return $queryBuilder->select('*')
+            ->from($tab);
     }
 
     /**
      * Get records paginated.
      */
-    public function findAllPaginated($page = 1)                        //robi pagniacje
+    public function findAllPaginated($page, $tab, $date)
     {
-        $countQueryBuilder = $this->queryAll()                              //wybiera rzeczy z bazy co przeszły przez queryall
-            ->select('COUNT(DISTINCT m.id) AS total_results')               //liczy unikalne id month jako total_results
-            ->setMaxResults(1);                                             //ustawia max rezultatów na 1?
+        $countQueryBuilderModifier = function ($queryBuilder) {
+            $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
+                ->setMaxResults(1);
+        };
 
-        $paginator = new Paginator($this->queryAll(), $countQueryBuilder);   //
-        $paginator->setCurrentPage($page);                                   //zapamiętuje obecną stronę
-        $paginator->setMaxPerPage(self::NUM_ITEMS);                          //ustawia stałą ilość wyników na stronie
+        $queryBuilder = $this->queryAll($tab)
+            ->orderBy($date, 'DESC');
 
-        return $paginator->getCurrentPageResults();
-    }
-
-    /**
-     * Count all pages.
-     *
-     * @return int Result
-     */
-    protected function countAllPages()                                         //liczy ilość stron
-    {
-        $pagesNumber = 1;
-
-        $queryBuilder = $this->queryAll();
-        $queryBuilder->select('COUNT(DISTINCT m.id) AS total_results')
-            ->setMaxResults(1);
-
-        $result = $queryBuilder->execute()->fetch();
-
-        if ($result) {
-            $pagesNumber =  ceil($result['total_results'] / self::NUM_ITEMS);         //ilość stron =  ilość wyników podzielić na max ilość na stronie
-        } else {
-            $pagesNumber = 1;                                                        //inaczej ilość stron to jeden
-        }
-
-        return $pagesNumber;
+        $adapter = new DoctrineDbalAdapter($queryBuilder, $countQueryBuilderModifier);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(self::NUM_ITEMS);
+        $pagerfanta->setCurrentPage($page);
+        return $pagerfanta;
     }
 
     /**
      * Save record.
      */
-    public function save($month)                                              //zapisywanie do bazy
+    public function save($month)
     {
-        if (isset($month['id']) && ctype_digit((string) $month['id'])) {      //jeżeli zmienna istnieje oraz wszystko jest stringami
+        if (isset($month['id']) && ctype_digit((string) $month['id'])) {
             // update record
-            $id = $month['id'];                                                //zmienna id przyjmie wartość id utworzonego rekordu
-            unset($month['id']);                                               //zwolnimy wartość id utorzonego rekordu
+            $id = $month['id'];
+            unset($month['id']);
 
-            return $this->db->update('month', $month, ['id' => $id]);            //zaaktualizujemy tabele month dodając nowe dane ze zmiennej month
+            return $this->db->update('month', $month, ['id' => $id]);
         } else {
             // add new record
-            return $this->db->insert('month', $month);                       //a jak nie istnieje to dodajemy nowy rekord
+            return $this->db->insert('month', $month); // pierwsze categorie to nazwa tabeli
         }
     }
 
     /**
      * znajdź te miesiące - nazwy limity, które id się zgadza
-     */
-    public function findAllById($id)
+
+    public function findMonthByUserID($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
             $queryBuilder->select('m.name')
@@ -136,6 +118,54 @@ class MonthRepository
             ->setParameter(':id', $id, \PDO::PARAM_INT);
 
             return $queryBuilder->execute()->fetch();
+    }*/
+
+    /*
+    public function findMonthByUser($userLogin)
+    {
+        $userId = $this->findUserId($userLogin);
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder->select('m.name')
+            ->from('user', 'u')
+            ->join('u', 'month', 'm', 'm.user_id = u.id')
+            ->where('u.id = :id')
+            ->setParameter(':id', $userId, \PDO::PARAM_INT)
+            ->orderBy('date_from');
+        $result = $queryBuilder->execute()->fetch();
+        return $result;
     }
 
+    protected function findUserId($login)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder->select('id')
+            ->from('user')
+            ->where('login = :login')
+            ->setParameter(':login', $login);
+        $userId = current($queryBuilder->execute()->fetch());
+        return $userId;
+    }*/
+
+    public function getUserMonth($userId)
+    {
+        $month = [];
+
+        try {
+            $queryBuilder = $this->db->createQueryBuilder();
+            $queryBuilder->select('m.name')
+            ->from('month', 'm')
+            ->innerJoin('m', 'user', 'u', 'm.user_id = u.id')
+            ->where('u.id = :id')
+            ->setParameter(':id', $userId, \PDO::PARAM_INT);
+            $result = $queryBuilder->execute()->fetchAll();
+
+            if ($result) {
+                $month = array_column($result, 'name');
+            }
+
+            return $month;
+        } catch (DBALException $exception) {
+            return $month;
+        }
+    }
 }

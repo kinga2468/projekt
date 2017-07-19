@@ -12,12 +12,14 @@
                     <a href="log.html">Budżet domowy</a>
                 </div>
                 <div class="witaj">
-                    <p class="wyloguj">
-                        <a href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
-                            {{ 'auth.logout.label'|trans }}
-                        </a>
-                    </p>
-                    <p class="imie">Witaj _____, </p>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <p class="wyloguj">
+                            <a href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
+                                {{ 'auth.logout.label'|trans }}
+                            </a>
+                        </p>
+                        <p class="imie">Witaj {{ app.user.username }},</p>
+                    {% endif %}
                 </div>
                 <div class="historia">
                     <p>
@@ -30,19 +32,19 @@
         </header>
         <div class="kontener">
             <div class="miesiac">
-                <a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>
+                {#<a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>#}
                 <div class="data">
-                    {% if paginator|length %}
+                    {% if month|length %}
                         <p>
-                            {{ paginator.name|upper }}
+                            {{ month.name|upper }}
                         </p>
                     {% else %}
                         <p>
                             Brak miesiąca!
                         </p>
-                {% endif %}
+                    {% endif %}
                 </div>
-                <a title="Zobacz następny miesiąc" href="#.html"><span class="fa fa-angle-right"></span></a>
+                {#<a title="Zobacz następny miesiąc" href="#.html"><span class="fa fa-angle-right"></span></a>#}
             </div>
             <div class="limit">
                 <p>Limit: </p>

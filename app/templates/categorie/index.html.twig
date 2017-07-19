@@ -18,11 +18,7 @@
                         {{ 'auth.logout.label'|trans }}
                     </a>
                 </p>
-                    <p class="imie">Witaj _____, </p>
-                    {#{% else %}
-                    <a class="btn btn-default" href="{{ url('auth_login') }}" title="{{ 'auth.login.label'|trans }}">
-                        {{ 'auth.login.label'|trans }}
-                    </a>#}
+                    <p class="imie">Witaj {{ app.user.username }},</p>
                 {% endif %}
             </div>
             <div class="historia">
@@ -32,9 +28,9 @@
         </header>
         <div class="kontener">
             <div class="miesiac">
-                <a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>
-                <p class="data">LUTY</p>
-                <a title="Zobacz następny miesiąc" href="#.html"><span class="fa fa-angle-right"></span></a>
+                {#<a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>#}
+                <div class="data"><p>LUTY</p></div>
+                {#<a title="Zobacz następny miesiąc" href="#.html"><span class="fa fa-angle-right"></span></a>#}
             </div>
             <div class="limit">
                 <p>Limit: </p>
@@ -64,8 +60,8 @@
                 <div class="message">
                     {% include 'default/_flash_messages.html.twig' %}
                 </div>
-                {% if paginator.data|length %}
-                    {% for row in paginator.data %}
+                {% if paginator|length %}
+                    {% for row in paginator %}
                         <div class="kategoria k">
                             <span class="{{ row.icon }}"></span>
                             <p class="nazwa">{{ row.name|upper }}</p>

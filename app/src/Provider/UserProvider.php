@@ -58,18 +58,6 @@ class UserProvider implements UserProviderInterface
         );
     }
 
-    /*public function getUser()
-    {
-        $user = null;
-        $token = $app['security.token_storage']->getToken();
-
-        if ($token !== null) {
-            $user = $token->getUser();
-        }
-
-        return $user;
-    }*/
-
     /**
      * Refresh user.
      *

@@ -61,7 +61,7 @@ class UserRepository
                 );
             }
 
-            return [                                                       //i jak znajdziejsz to
+            return [                                                       //i jak znajdziejsz to zwróć
                 'login' => $user['login'],
                 'password' => $user['password'],
                 'roles' => $roles,
@@ -127,5 +127,17 @@ class UserRepository
         } catch (DBALException $exception) {                                         //jak wykryje błędy to zwróć roles ?
             return $roles;
         }
+    }
+
+
+    public function findUserId($login)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder->select('id')
+            ->from('user')
+            ->where('login = :login')
+            ->setParameter(':login', $login);
+        $userId = current($queryBuilder->execute()->fetch());
+        return $userId;
     }
 }

@@ -57,20 +57,22 @@ class CategorieController implements ControllerProviderInterface
 
         return $app['twig']->render(
             'categorie/index.html.twig',
-            ['paginator' => $categorieRepository->findAllPaginated($page)]
+            ['paginator' => $categorieRepository->findAllPaginated($page, 'categorie')]
         );
     }
 
     /**
      * View action.
      */
-    public function viewAction(Application $app, $id)
+    public function viewAction(Application $app, Request $request)
     {
         $categorieRepository = new CategorieRepository($app['db']);
 
+        $id = $request->get('id');
         return $app['twig']->render(
             'categorie/view.html.twig',
-            ['categorie' => $categorieRepository->findOneById($id)]
+            ['categorie' => $categorieRepository->findOneById($id, 'categorie'),
+            'id' => $id]
         );
     }
 
@@ -120,7 +122,7 @@ class CategorieController implements ControllerProviderInterface
     public function editAction(Application $app, $id, Request $request)
     {
         $categorieRepository = new CategorieRepository($app['db']);
-        $categorie = $categorieRepository->findOneById($id);
+        $categorie = $categorieRepository->findOneById($id, 'categorie');
 
         if (!$categorie) {
             $app['session']->getFlashBag()->add(
@@ -166,7 +168,7 @@ class CategorieController implements ControllerProviderInterface
     public function deleteAction(Application $app, $id, Request $request)
     {
         $categorieRepository = new CategorieRepository($app['db']);
-        $categorie = $categorieRepository->findOneById($id);
+        $categorie = $categorieRepository->findOneById($id, 'categorie');
 
         if (!$categorie) {
             $app['session']->getFlashBag()->add(
