@@ -9,6 +9,8 @@ use Silex\Api\ControllerProviderInterface;
 use Repository\MonthRepository;
 use Form\MonthType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * Class MonthController.
@@ -33,6 +35,14 @@ class MonthController implements ControllerProviderInterface      //klasa dla co
         $controller->match('/add', [$this, 'addAction'])
             ->method('POST|GET')
             ->bind('month_add');
+        $controller->match('/{id}/edit', [$this, 'editAction'])
+            ->method('GET|POST')
+            ->assert('id', '[1-9]\d*')
+            ->bind('month_edit');
+        $controller->match('/{id}/delete', [$this, 'deleteAction'])
+            ->method('GET|POST')
+            ->assert('id', '[1-9]\d*')
+            ->bind('month_delete');
 
         return $controller;
     }
@@ -108,6 +118,107 @@ class MonthController implements ControllerProviderInterface      //klasa dla co
             [
                 'month' => $month,                               //gdzie month to zmienna month
                 'form' => $form->createView(),                   //a form to funckja wyświetl
+            ]
+        );
+    }
+
+    /**
+     * Edit action.
+     */
+    public function editAction(Application $app, $id, Request $request)
+    {
+        $token = $app['security.token_storage']->getToken();
+        if (null !== $token) {
+            $user = $token->getUser();
+            $userLogin = $user->getUsername();
+        }
+
+        $monthRepository = new MonthRepository($app['db']);
+        $month = $monthRepository->findOneById($id);
+
+        if (!$month) {
+            $app['session']->getFlashBag()->add(
+                'messages',
+                [
+                    'type' => 'warning',
+                    'message' => 'message.record_not_found',
+                ]
+            );
+
+            return $app->redirect($app['url_generator']->generate('month_index'));
+        }
+
+        $form = $app['form.factory']->createBuilder(MonthType::class, $month)->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monthRepository->save($form->getData(), $userLogin);
+
+            $app['session']->getFlashBag()->add(
+                'messages',
+                [
+                    'type' => 'success',
+                    'message' => 'message.element_successfully_edited',
+                ]
+            );
+
+            return $app->redirect($app['url_generator']->generate('month_index'), 301);
+        }
+
+        return $app['twig']->render(
+            'history/edit.html.twig',
+            [
+                'month' => $month,
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * Delete action
+     */
+    public function deleteAction(Application $app, $id, Request $request)
+    {
+        $monthRepository = new MonthRepository($app['db']);
+        $month = $monthRepository->findOneById($id);
+
+        if (!$month) {
+            $app['session']->getFlashBag()->add(
+                'messages',
+                [
+                    'type' => 'warning',
+                    'message' => 'message.record_not_found',
+                ]
+            );
+
+            return $app->redirect($app['url_generator']->generate('month_index'));
+        }
+
+        $form = $app['form.factory']->createBuilder(FormType::class, $month)->add('id', HiddenType::class)->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $monthRepository->delete($form->getData());
+
+            $app['session']->getFlashBag()->add(
+                'messages',
+                [
+                    'type' => 'success',
+                    'message' => 'message.element_successfully_deleted',
+                ]
+            );
+
+            return $app->redirect(
+                $app['url_generator']->generate('month_index'),
+                301
+            );
+        }
+
+        return $app['twig']->render(
+            'history/delete.html.twig',
+            [
+                'month' => $month,
+                'form' => $form->createView(),
             ]
         );
     }

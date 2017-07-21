@@ -38,10 +38,6 @@
                 <source>back.to.list</source>
                 <target>Return</target>
             </trans-unit>
-            <trans-unit id="title.categorie_edit">
-                <source>title.categorie_edit</source>
-                <target>Edit</target>
-            </trans-unit>
             <trans-unit id="message.element_successfully_edited">
                 <source>message.element_successfully_edited</source>
                 <target>Element successfully edited</target>
@@ -100,7 +96,7 @@
             </trans-unit>
             <trans-unit id="title.categorie_delete">
                 <source>title.categorie_delete</source>
-                <target>Category delete</target>
+                <target>Category delete: </target>
             </trans-unit>
             <trans-unit id="message.element_successfully_deleted">
                 <source>message.element_successfully_deleted</source>
@@ -112,7 +108,7 @@
             </trans-unit>
             <trans-unit id="label.view">
                 <source>label.view</source>
-                <target>View</target>
+                <target>View |</target>
             </trans-unit>
             <trans-unit id="label.nav.next">
                 <source>label.nav.next</source>
@@ -137,6 +133,22 @@
             <trans-unit id="new.month">
                 <source>new.month</source>
                 <target>New month</target>
+            </trans-unit>
+            <trans-unit id="label.upper_limit">
+                <source>label.upper_limit</source>
+                <target>Limit: </target>
+            </trans-unit>
+            <trans-unit id="hello">
+                <source>hello</source>
+                <target>Hello</target>
+            </trans-unit>
+            <trans-unit id="title.month_delete">
+                <source>title.month_delete</source>
+                <target>Month delete: </target>
+            </trans-unit>
+            <trans-unit id="index_month_delete">
+                <source>index_month_delete</source>
+                <target>delete</target>
             </trans-unit>
         </body>
     </file>

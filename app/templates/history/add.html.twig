@@ -18,7 +18,7 @@
                                 {{ 'auth.logout.label'|trans }}
                             </a>
                         </p>
-                        <p class="imie">Witaj {{ app.user.username }},</p>
+                        <p class="imie">{{ 'hello'|trans }} {{ app.user.username }},</p>
                     {% endif %}
                 </div>
                 <div class="history">
@@ -34,7 +34,7 @@
             </div>
             <input type="submit" value="{{ 'action.save'|trans }}" class="zapisz" />
             {{ form_end(form) }}
-            <a class ="wroc" href="{{ url('categorie_index') }}" title="{{ 'back.to.list'|trans }}">
+            <a class ="wroc" href="{{ url('month_index') }}" title="{{ 'back.to.list'|trans }}">
                 {{ 'back.to.list'|trans }}
             </a>
         </div>

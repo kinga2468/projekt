@@ -96,6 +96,8 @@ class MonthRepository
         $user_id = $this -> findUserIdByLogin($userLogin);
         $month['user_id'] = $user_id;
         $month['remained'] = $month['upper_limit'];
+        //ConvertToDateTime($month['date_from']);
+        //$month['date_to'] -> format('d/m/Y');
 
         if (isset($month['id']) && ctype_digit((string) $month['id']) && isset($user_id)) {
             // update record
@@ -135,4 +137,13 @@ class MonthRepository
         $user_id = current($queryBuilder->execute()->fetch());
         return $user_id;
     }
+
+    /**
+     * Remove record.
+     */
+    public function delete($month)
+    {
+        return $this->db->delete('month'/*tabela month*/, ['id' => $month['id']]);
+    }
+
 }

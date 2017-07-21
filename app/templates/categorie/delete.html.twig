@@ -16,7 +16,7 @@
                                 {{ 'auth.logout.label'|trans }}
                             </a>
                         </p>
-                        <p class="imie">Witaj {{ app.user.username }},</p>
+                        <p class="imie">{{ 'hello'|trans }} {{ app.user.username }},</p>
                     {% endif %}
                 </div>
                 <div class="history">
@@ -25,7 +25,7 @@
             {% endblock %}
         </header>
         <div class="akcje">
-            <h1>{{ 'title.categorie_delete'|trans({'%id%': categorie.id}) }}</h1>
+            <h1>{{ 'title.categorie_delete'|trans({'%id%': categorie.id}) }} {{ month.name }}</h1>
             <div class="form">
                 {{ form_start(form, { method: 'post', action: url('categorie_delete', {'id': categorie.id}) }) }}
                 {{ form_widget(form) }}

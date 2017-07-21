@@ -38,8 +38,8 @@
                 <source>back.to.list</source>
                 <target>Powrót</target>
             </trans-unit>
-            <trans-unit id="title.categorie_edit">
-                <source>title.categorie_edit</source>
+            <trans-unit id="title.edit">
+                <source>title.edit</source>
                 <target>Edytuj</target>
             </trans-unit>
             <trans-unit id="message.element_successfully_edited">
@@ -50,9 +50,9 @@
                 <source>message.record_not_found</source>
                 <target>Nie znaleziono</target>
             </trans-unit>
-            <trans-unit id="index_categorie_edit">
-                <source>index_categorie_edit</source>
-                <target>edytuj  |</target>
+            <trans-unit id="index.edit">
+                <source>index.edit</source>
+                <target>edytuj |</target>
             </trans-unit>
             <trans-unit id="auth.logout.label">
                 <source>auth.logout.label</source>
@@ -103,7 +103,7 @@
             </trans-unit>
             <trans-unit id="title.categorie_delete">
                 <source>title.categorie_delete</source>
-                <target>Usuń kategorie</target>
+                <target>Usuń kategorie: </target>
             </trans-unit>
             <trans-unit id="message.element_successfully_deleted">
                 <source>message.element_successfully_deleted</source>
@@ -115,7 +115,7 @@
             </trans-unit>
             <trans-unit id="label.view">
                 <source>label.view</source>
-                <target>zobacz</target>
+                <target>zobacz |</target>
             </trans-unit>
             <trans-unit id="label.nav.next">
                 <source>label.nav.next</source>
@@ -124,10 +124,6 @@
             <trans-unit id="label.nav.prev">
                 <source>label.nav.prev</source>
                 <target>Poprzednia strona</target>
-            </trans-unit>
-            <trans-unit id="title.edit">
-                <source>title.edit</source>
-                <target>Edytowanie</target>
             </trans-unit>
             <trans-unit id="label.month_add">
                 <source>label.month_add</source>
@@ -140,6 +136,22 @@
             <trans-unit id="new.month">
                 <source>new.month</source>
                 <target>Nowy miesiąc</target>
+            </trans-unit>
+            <trans-unit id="label.upper_limit">
+                <source>label.upper_limit</source>
+                <target>Limit: </target>
+            </trans-unit>
+            <trans-unit id="hello">
+                <source>hello</source>
+                <target>Witaj</target>
+            </trans-unit>
+            <trans-unit id="title.month_delete">
+                <source>title.month_delete</source>
+                <target>Usuń miesiąc: </target>
+            </trans-unit>
+            <trans-unit id="index_month_delete">
+                <source>index_month_delete</source>
+                <target>usuń</target>
             </trans-unit>
         </body>
     </file>

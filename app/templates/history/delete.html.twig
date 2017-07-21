@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'title.edit'|trans({'%id%': categorie.id}) }}{% endblock %}
+{% block title %}{{ 'title.delete'|trans({'%id%': month.id}) }}{% endblock %}
 
 {% block body %}
     <div class="main-container">
@@ -20,19 +20,19 @@
                     {% endif %}
                 </div>
                 <div class="history">
-                    <p><a titile="Historia" href="">Kategoria</a></p>
+                    <p><a titile="Historia" href="">Miesiąc</a></p>
                 </div>
             {% endblock %}
         </header>
         <div class="akcje">
-            <h1>{{ 'title.edit'|trans({'%id%': categorie.id}) }}</h1>
+            <h1>{{ 'title.month_delete'|trans({'%id%': month.id}) }} {{ month.name }}</h1>
             <div class="form">
-                {{ form_start(form, { method: 'post', action: url('categorie_edit', {'id': categorie.id}) }) }}
+                {{ form_start(form, { method: 'post', action: url('month_delete', {'id': month.id}) }) }}
                 {{ form_widget(form) }}
             </div>
-            <input type="submit" value="{{ 'action.save'|trans }}" class="zapisz" />
+            <input type="submit" value="{{ 'action.delete'|trans }}" class="zapisz" />
             {{ form_end(form) }}
-            <a class="wroc" href="{{ url('categorie_index') }}" title="{{ 'back.to.list'|trans }}">
+            <a class="wroc" href="{{ url('month_index') }}" title="{{ 'back.to.list'|trans }}">
                 {{ 'back.to.list'|trans }}
             </a>
         </div>

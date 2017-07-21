@@ -18,7 +18,7 @@
                                 {{ 'auth.logout.label'|trans }}
                             </a>
                         </p>
-                        <p class="imie">Witaj {{ app.user.username }},</p>
+                        <p class="imie">{{ 'hello'|trans }} {{ app.user.username }},</p>
                     {% endif %}
                 </div>
                 <div class="history">
@@ -42,10 +42,15 @@
                         <div class="kategoria k">
                             <p class="nazwa">{{ row.name|upper }}</p>
                             <div class="link">
-                                <a href="{{ url('month_view', {'id': row.id}) }}" title="{{ 'label.view'|trans }}">
+                                <a class="edit" href="{{ url('month_delete', {'id': row.id}) }}" title="{{ 'index_month_delete'|trans }}">
+                                    <span class="fa fa-times-circle"></span>
+                                </a>
+                                <a class="edit" href="{{ url('month_edit', {'id': row.id}) }}" title="{{ 'index.edit'|trans }}">
+                                    {{ 'index.edit'|trans }}
+                                </a>
+                                <a class="edit" href="{{ url('month_view', {'id': row.id}) }}" title="{{ 'label.view'|trans }}">
                                     {{ 'label.view'|trans }}
-                                </a>|
-                                <a title="Usuń" href="#"> usuń</a>
+                                </a>
                             </div>
                         </div>
                     {% endfor %}

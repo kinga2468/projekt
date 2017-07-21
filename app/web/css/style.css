@@ -73,9 +73,9 @@ a{text-decoration:none; color:black;}
 
 .kategorie{background-color:#838CA3; margin:45px 50px 0 50px ;}
 .kategoria{border-bottom: solid; height:50px; font-size:1.2em;}
-.kategoria .fa{float:left; margin: 16px 15px;}
+.kategoria .fa{float:left; margin: 17px 15px;}
 .kategoria .nazwa{float:left; padding: 13px 8px 8px 10px; }
-.edit{float:right; margin:13px 12px 0 0;}
+.edit{float:right; margin:13px 7px 0 0;}
 .k .fa-times-circle{float:right; margin: 4px 2px 0 0 ;}
 
 .operacje{background-color:#A39A83; margin:40px 50px 0 50px ;}
@@ -110,7 +110,7 @@ footer{margin-top:50px;}
 
 
 /*podstrona z historią */
-.link{float:right; margin: 12px 20px 0 0;}
+/*.link{float:right; margin: 12px 20px 0 0;}*/
 .link a:hover{color:#EDEDEA;}
 .history{background-color: #7AC402; clear:both; float:right; width:100%; }
 .history p{text-align: center; font-size:1.3em; margin:7px 15px;}
