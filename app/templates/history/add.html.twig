@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    History
+    {{ 'title.add'|trans }}
 {% endblock %}
 
 {% block body %}
@@ -12,26 +12,31 @@
                     <a href="log.html">Budżet domowy</a>
                 </div>
                 <div class="witaj">
-                    <p class="wyloguj">
-                        <a href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
-                            {{ 'auth.logout.label'|trans }}
-                        </a>
-                    </p>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <p class="wyloguj">
+                            <a href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
+                                {{ 'auth.logout.label'|trans }}
+                            </a>
+                        </p>
                         <p class="imie">Witaj {{ app.user.username }},</p>
                     {% endif %}
                 </div>
                 <div class="history">
-                    <p><a titile="Historia" href="">Nowy miesiąc</a></p>
+                    <p><a titile="Historia" href=""> {{ 'new.month'|trans }} </a></p>
                 </div>
             {% endblock %}
         </header>
-        <div class="kontener">
-            <h1>{{ 'title.month_add'|trans }}</h1>
-            {{ form_start(form, { method: 'post', action: url('month_add') }) }}
-            {{ form_widget(form) }}
-            <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-success" />
+        <div class="akcje">
+            <h1>{{ 'title.add'|trans }}</h1>
+            <div class="form">
+                {{ form_start(form, { method: 'post', action: url('month_add') }) }}
+                {{ form_widget(form) }}
+            </div>
+            <input type="submit" value="{{ 'action.save'|trans }}" class="zapisz" />
             {{ form_end(form) }}
+            <a class ="wroc" href="{{ url('categorie_index') }}" title="{{ 'back.to.list'|trans }}">
+                {{ 'back.to.list'|trans }}
+            </a>
         </div>
         <footer>
             {% block footer %}

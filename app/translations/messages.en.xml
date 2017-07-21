@@ -126,6 +126,18 @@
                 <source>title.edit</source>
                 <target>Edit</target>
             </trans-unit>
+            <trans-unit id="label.month_add">
+                <source>label.month_add</source>
+                <target>Add new month</target>
+            </trans-unit>
+            <trans-unit id="new.category">
+                <source>new.category</source>
+                <target>New category</target>
+            </trans-unit>
+            <trans-unit id="new.month">
+                <source>new.month</source>
+                <target>New month</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

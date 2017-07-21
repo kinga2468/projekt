@@ -93,12 +93,9 @@ class MonthRepository
      */
     public function save($month, $userLogin)
     {
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder->select('u.id')
-            ->from('user', 'u')
-            ->where('u.login = :login')
-            ->setParameter(':login', $userLogin, \PDO::PARAM_INT);
-        $user_id = $queryBuilder->execute()->fetchAll();
+        $user_id = $this -> findUserIdByLogin($userLogin);
+        $month['user_id'] = $user_id;
+        $month['remained'] = $month['upper_limit'];
 
         if (isset($month['id']) && ctype_digit((string) $month['id']) && isset($user_id)) {
             // update record
@@ -108,7 +105,7 @@ class MonthRepository
             return $this->db->update('month', $month, ['id' => $id]);
         } else {
             // add new record
-            return $this->db->insert('month', $month) where ; // pierwsze month to nazwa tabeli
+            return $this->db->insert('month', $month); // pierwsze month to nazwa tabeli
         }
     }
 
@@ -126,5 +123,16 @@ class MonthRepository
         $result = $queryBuilder->execute()->fetchAll();
         return $result;
 
+    }
+
+    protected function findUserIdByLogin($userLogin)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder->select('u.id')
+            ->from('user', 'u')
+            ->where('u.login = :login')
+            ->setParameter(':login', $userLogin, \PDO::PARAM_INT);
+        $user_id = current($queryBuilder->execute()->fetch());
+        return $user_id;
     }
 }

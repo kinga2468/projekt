@@ -29,7 +29,11 @@
         <div class="kontener">
             <div class="przyciski2">
                 <div class="nowy_miesiac">
-                    <p class="wprzycisk"><a title="dodaj miesiąc" href="#">Dodaj nowy miesiąc</a></p>
+                    <p class="wprzycisk">
+                        <a href="{{ url('month_add') }}" title="{{ 'label.month_add'|trans }}">
+                            {{ 'label.month_add'|trans }}
+                        </a>
+                    </p>
                 </div>
             </div>
             <div class="kategorie2">

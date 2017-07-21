@@ -32,7 +32,7 @@ class MonthType extends AbstractType
                     'max_length' => 128,
                 ],
             ]
-        );/*
+        );
         $builder->add(
             'date_from',
             DateType::class,
@@ -48,7 +48,7 @@ class MonthType extends AbstractType
                 'label' => 'label.date_from',
                 'format' => 'yyyy-MM-dd',
             ]
-        );*/
+        );
         $builder->add(
             'upper_limit',
             IntegerType::class,
