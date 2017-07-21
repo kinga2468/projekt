@@ -38,15 +38,22 @@ class MonthController implements ControllerProviderInterface      //klasa dla co
     }
 
     /**
-     * Index action.
+     * Index action - show only this month which user is logged
     */
-    public function indexAction(Application $app, $page = 1)
+    public function indexAction(Application $app)
     {
         $monthRepository = new MonthRepository($app['db']);
 
+        $token = $app['security.token_storage']->getToken();
+        if (null !== $token) {
+            $user = $token->getUser();
+            $userLogin = $user->getUsername();
+        }
+
         return $app['twig']->render(
             'history/index.html.twig',
-            ['paginator' => $monthRepository->findAllPaginated($page, 'month', 'date_to'),
+            ['paginator' => $monthRepository->getUserMonth($userLogin),
+            //['paginator' => $monthRepository->findAllPaginated($page, 'month', 'date_to'),
             //'route_name' => 'month_index_paginated'
             ]
         );
@@ -55,15 +62,13 @@ class MonthController implements ControllerProviderInterface      //klasa dla co
     /**
      * View action.
      */
-    public function viewAction(Application $app, Request $request)                            //wyświetla konkretną krotkę
+    public function viewAction(Application $app, $id)                            //wyświetla konkretną krotkę
     {
         $monthRepository = new MonthRepository($app['db']);
 
-        $id = $request->get('id');
         return $app['twig']->render(
             'history/view.html.twig',
-            ['month' => $monthRepository->findOneById($id, 'month'),
-                'id' => $id]
+            ['month' => $monthRepository->findOneById($id)]
         );
     }
 
@@ -72,14 +77,28 @@ class MonthController implements ControllerProviderInterface      //klasa dla co
      */
     public function addAction(Application $app, Request $request)                               //funkcja dodawania, wstrzyknięcie w nagłówku obiektu Request do kontrolera.
     {
-        $month = [];                                                                             //tablica month jest pusta
+        $month = [];
+
+        $token = $app['security.token_storage']->getToken();
+        if (null !== $token) {
+            $user = $token->getUser();
+            $userLogin = $user->getUsername();
+        }
 
         $form = $app['form.factory']->createBuilder(MonthType::class, $month)->getForm();      //tworzymy formularz
         $form->handleRequest($request);                                                        //bindujemy do formularza dane wpisane przez użytkownika (znajdujące się w obiekcie $Request).
 
         if ($form->isSubmitted() && $form->isValid()) {                                        //jeśli dane chciały być przesłane oraz dane są wpisane poprawnie
             $monthRepository = new MonthRepository($app['db']);
-            $monthRepository->save($form->getData());                                          //zapisz dane
+            $monthRepository->save($form->getData(), $userLogin);
+
+            $app['session']->getFlashBag()->add(
+                'messages',
+                [
+                    'type' => 'success',
+                    'message' => 'message.element_successfully_added',
+                ]
+            );
 
             return $app->redirect($app['url_generator']->generate('month_index'), 301);       //a potem przekieruj na strone month index
         }
@@ -92,16 +111,4 @@ class MonthController implements ControllerProviderInterface      //klasa dla co
             ]
         );
     }
-
-    /*
-    protected function getUserLogin(Application $app)
-    {
-        $token = $app['security.token_storage']->getToken();
-        if (null !== $token) {
-            $user = $token->getUser();
-            $userLogin = $user->getUsername();
-        }
-        return $userLogin;
-    }*/
-
 }

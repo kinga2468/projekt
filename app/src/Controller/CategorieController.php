@@ -51,28 +51,26 @@ class CategorieController implements ControllerProviderInterface
     /**
      * Index action.
      */
-    public function indexAction(Application $app, $page = 1)
+    public function indexAction(Application $app)
     {
         $categorieRepository = new CategorieRepository($app['db']);
 
         return $app['twig']->render(
             'categorie/index.html.twig',
-            ['paginator' => $categorieRepository->findAllPaginated($page, 'categorie')]
+            ['paginator' => $categorieRepository->findAll()]
         );
     }
 
     /**
      * View action.
      */
-    public function viewAction(Application $app, Request $request)
+    public function viewAction(Application $app, $id)
     {
         $categorieRepository = new CategorieRepository($app['db']);
 
-        $id = $request->get('id');
         return $app['twig']->render(
             'categorie/view.html.twig',
-            ['categorie' => $categorieRepository->findOneById($id, 'categorie'),
-            'id' => $id]
+            ['categorie' => $categorieRepository->findOneById($id)]
         );
     }
 
@@ -122,7 +120,7 @@ class CategorieController implements ControllerProviderInterface
     public function editAction(Application $app, $id, Request $request)
     {
         $categorieRepository = new CategorieRepository($app['db']);
-        $categorie = $categorieRepository->findOneById($id, 'categorie');
+        $categorie = $categorieRepository->findOneById($id);
 
         if (!$categorie) {
             $app['session']->getFlashBag()->add(
@@ -168,7 +166,7 @@ class CategorieController implements ControllerProviderInterface
     public function deleteAction(Application $app, $id, Request $request)
     {
         $categorieRepository = new CategorieRepository($app['db']);
-        $categorie = $categorieRepository->findOneById($id, 'categorie');
+        $categorie = $categorieRepository->findOneById($id);
 
         if (!$categorie) {
             $app['session']->getFlashBag()->add(

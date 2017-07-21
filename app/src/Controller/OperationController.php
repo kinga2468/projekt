@@ -4,11 +4,10 @@
  */
 namespace Controller;
 
-//use Model\Expenses\Arr\Expenses;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 use Repository\OperationRepository;
-//use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class OperationController.
@@ -27,7 +26,9 @@ class OperationController implements ControllerProviderInterface
         $controller->get('/page/{page}', [$this, 'indexAction'])
             ->value('page', 1)
             ->bind('operation_index_paginated');
-        $controller->get('/{id}', [$this, 'viewAction'])->bind('operation_view');
+        $controller->get('/{id}', [$this, 'viewAction'])
+            ->assert('id', '[1-9]\d*')
+            ->bind('operation_view');
 
         return $controller;
     }
@@ -35,26 +36,38 @@ class OperationController implements ControllerProviderInterface
     /**
      * Index action.
      */
-    public function indexAction(Application $app, $page = 1)
+    /*public function indexAction(Application $app, $page = 1)
     {
         $operationRepository = new OperationRepository($app['db']);
 
         return $app['twig']->render(
             'operation/index.html.twig',
-            ['paginator' => $operationRepository->findAllPaginated($page)]
+            ['paginator' => $operationRepository->findAllPaginated($page, 'operation')]
         );
-    }
+    }*/
 
     /**
      * View action.
      */
-    public function viewAction(Application $app, $id)
+    public function viewAction(Application $app, Request $request)
+    {
+        $operationRepository = new OperationRepository($app['db']);
+
+        $id = $request->get('id');
+        return $app['twig']->render(
+            'operation/view.html.twig',
+            ['operation' => $operationRepository->findOneById($id, 'operation'),
+                'id' => $id]
+        );
+    }
+
+    public function indexAction(Application $app, $id=1)
     {
         $operationRepository = new OperationRepository($app['db']);
 
         return $app['twig']->render(
-            'operation/view.html.twig',
-            ['operation' => $operationRepository->findOneById($id)]
+            'operation/index.html.twig',
+            ['paginator' => $operationRepository->loadOperationById($id)]
         );
     }
 

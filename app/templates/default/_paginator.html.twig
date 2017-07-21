@@ -1,7 +1,7 @@
 {#
     Default view for paginator.
 #}
-
+{#
 {% if paginator.getCurrentPage < paginator.getNbPages %}
     {% set next = (paginator.getCurrentPage + 1) %}
     <div class="next">
@@ -18,4 +18,4 @@
             {{ 'label.nav.prev'|trans }}
         </a>
     </div>
-{%  endif %}
+{%  endif %}#}

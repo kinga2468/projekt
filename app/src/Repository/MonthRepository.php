@@ -35,9 +35,9 @@ class MonthRepository
     /**
      * Fetch all records.
      */
-    public function findAll($tab)
+    public function findAll()
     {
-        $queryBuilder = $this->queryAll($tab);
+        $queryBuilder = $this->queryAll();
 
         return $queryBuilder->execute()->fetchAll();
     }
@@ -45,10 +45,10 @@ class MonthRepository
     /**
      * Find one record.
      */
-    public function findOneById($id, $tab)
+    public function findOneById($id)
     {
-        $queryBuilder = $this->queryAll($tab);
-        $queryBuilder->where('id = :id')
+        $queryBuilder = $this->queryAll();
+        $queryBuilder->where('m.id = :id')
             ->setParameter(':id', $id, \PDO::PARAM_INT);
         $result = $queryBuilder->execute()->fetch();
 
@@ -60,12 +60,12 @@ class MonthRepository
      *
      * @return \Doctrine\DBAL\Query\QueryBuilder Result
      */
-    protected function queryAll($tab)
+    protected function queryAll()
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
         return $queryBuilder->select('*')
-            ->from($tab);
+            ->from('month', 'm');
     }
 
     /**
@@ -91,9 +91,16 @@ class MonthRepository
     /**
      * Save record.
      */
-    public function save($month)
+    public function save($month, $userLogin)
     {
-        if (isset($month['id']) && ctype_digit((string) $month['id'])) {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder->select('u.id')
+            ->from('user', 'u')
+            ->where('u.login = :login')
+            ->setParameter(':login', $userLogin, \PDO::PARAM_INT);
+        $user_id = $queryBuilder->execute()->fetchAll();
+
+        if (isset($month['id']) && ctype_digit((string) $month['id']) && isset($user_id)) {
             // update record
             $id = $month['id'];
             unset($month['id']);
@@ -101,71 +108,23 @@ class MonthRepository
             return $this->db->update('month', $month, ['id' => $id]);
         } else {
             // add new record
-            return $this->db->insert('month', $month); // pierwsze categorie to nazwa tabeli
+            return $this->db->insert('month', $month) where ; // pierwsze month to nazwa tabeli
         }
     }
-
-    /**
-     * znajdź te miesiące - nazwy limity, które id się zgadza
-
-    public function findMonthByUserID($id)
-    {
-        $queryBuilder = $this->db->createQueryBuilder();
-            $queryBuilder->select('m.name')
-            ->from('user', 'u')
-            ->innerJoin('u', 'month', 'm', 'm.user_id = u.id')
-            ->where('u.id = :id')
-            ->setParameter(':id', $id, \PDO::PARAM_INT);
-
-            return $queryBuilder->execute()->fetch();
-    }*/
 
     /*
-    public function findMonthByUser($userLogin)
-    {
-        $userId = $this->findUserId($userLogin);
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder->select('m.name')
-            ->from('user', 'u')
-            ->join('u', 'month', 'm', 'm.user_id = u.id')
-            ->where('u.id = :id')
-            ->setParameter(':id', $userId, \PDO::PARAM_INT)
-            ->orderBy('date_from');
-        $result = $queryBuilder->execute()->fetch();
-        return $result;
-    }
-
-    protected function findUserId($login)
+     *   select this month which user is logged
+     */
+    public function getUserMonth($userLogin)
     {
         $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder->select('id')
-            ->from('user')
-            ->where('login = :login')
-            ->setParameter(':login', $login);
-        $userId = current($queryBuilder->execute()->fetch());
-        return $userId;
-    }*/
-
-    public function getUserMonth($userId)
-    {
-        $month = [];
-
-        try {
-            $queryBuilder = $this->db->createQueryBuilder();
-            $queryBuilder->select('m.name')
+        $queryBuilder->select('m.name', 'm.id')
             ->from('month', 'm')
             ->innerJoin('m', 'user', 'u', 'm.user_id = u.id')
-            ->where('u.id = :id')
-            ->setParameter(':id', $userId, \PDO::PARAM_INT);
-            $result = $queryBuilder->execute()->fetchAll();
+            ->where('u.login = :login')
+            ->setParameter(':login', $userLogin, \PDO::PARAM_INT);
+        $result = $queryBuilder->execute()->fetchAll();
+        return $result;
 
-            if ($result) {
-                $month = array_column($result, 'name');
-            }
-
-            return $month;
-        } catch (DBALException $exception) {
-            return $month;
-        }
     }
 }

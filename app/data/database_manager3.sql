@@ -84,8 +84,8 @@ ALTER TABLE `information` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 CREATE TABLE IF NOT EXISTS `month` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
-  `date_from` DATETIME NOT NULL,
-  `date_to` DATETIME NOT NULL,
+  `date_from` DATE NOT NULL,
+  `date_to` DATE NOT NULL,
   `upper_limit` DECIMAL(12,2) NOT NULL,
   `remained` DECIMAL(12,2) NOT NULL,
   `user_id` INT NOT NULL,

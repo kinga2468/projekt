@@ -5,7 +5,10 @@
 namespace Repository;
 
 use Doctrine\DBAL\Connection;
-use Utils\Paginator;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineDbalAdapter;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Doctrine\DBAL\DBALException;
 
 /**
  * Class OperationRepository.
@@ -17,7 +20,7 @@ class OperationRepository
      *
      * const int NUM_ITEMS
      */
-    const NUM_ITEMS = 1;
+    const NUM_ITEMS = 10;
     /**
      * Doctrine DBAL connection.
      */
@@ -34,9 +37,9 @@ class OperationRepository
     /**
      * Fetch all records.
      */
-    public function findAll()
+    public function findAll($tab)
     {
-        $queryBuilder = $this->queryAll();
+        $queryBuilder = $this->queryAll($tab);
 
         return $queryBuilder->execute()->fetchAll();
     }
@@ -44,10 +47,10 @@ class OperationRepository
     /**
      * Find one record.
      */
-    public function findOneById($id)
+    public function findOneById($id, $tab)
     {
-        $queryBuilder = $this->queryAll();
-        $queryBuilder->where('o.id = :id')
+        $queryBuilder = $this->queryAll($tab);
+        $queryBuilder->where('id = :id')
             ->setParameter(':id', $id, \PDO::PARAM_INT);
         $result = $queryBuilder->execute()->fetch();
 
@@ -57,55 +60,94 @@ class OperationRepository
     /**
      * Query all records.
      */
-    protected function queryAll()
+    protected function queryAll($tab)
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
-        return $queryBuilder->select('o.id', 'o.name', 'o.value')
-            ->from('operation', 'o');
+        return $queryBuilder->select('*')
+            ->from($tab);
     }
 
     /**
      * Get records paginated.
-     *
-     * @param int $page Current page number
-     *
-     * @return array Result
      */
-    public function findAllPaginated($page = 1)
+    public function findAllPaginated($page, $tab)
     {
-        $countQueryBuilder = $this->queryAll()
-            ->select('COUNT(DISTINCT o.id) AS total_results')
-            ->setMaxResults(1);
+        $countQueryBuilderModifier = function ($queryBuilder) {
+            $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
+                ->setMaxResults(1);
+        };
 
-        $paginator = new Paginator($this->queryAll(), $countQueryBuilder);
-        $paginator->setCurrentPage($page);
-        $paginator->setMaxPerPage(self::NUM_ITEMS);
+        $queryBuilder = $this->queryAll($tab);
 
-        return $paginator->getCurrentPageResults();
+        $adapter = new DoctrineDbalAdapter($queryBuilder, $countQueryBuilderModifier);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(self::NUM_ITEMS);
+        $pagerfanta->setCurrentPage($page);
+        return $pagerfanta;
     }
 
-    /**
-     * Count all pages.
-     *
-     * @return int Result
-     */
-    protected function countAllPages()
+    public function getMonth($month_id)
     {
-        $pagesNumber = 1;
+        $operation = [];
 
-        $queryBuilder = $this->queryAll();
-        $queryBuilder->select('COUNT(DISTINCT o.id) AS total_results')
-            ->setMaxResults(1);
+        try {
+            $queryBuilder = $this->db->createQueryBuilder();
+            $queryBuilder->select('o.name', 'o.id')
+                ->from('operation', 'o')
+                ->innerJoin('o', 'month', 'm', 'o.month_id = m.id')
+                ->where('m.id = :id')
+                ->setParameter(':id', $month_id, \PDO::PARAM_INT);
+            $result = $queryBuilder->execute()->fetchAll();
 
-        $result = $queryBuilder->execute()->fetch();
+            if ($result) {
+                $operation = array_column($result, 'name');
+            }
 
-        if ($result) {
-            $pagesNumber =  ceil($result['total_results'] / self::NUM_ITEMS);
-        } else {
-            $pagesNumber = 1;
+            return $operation;
+        } catch (DBALException $exception) {
+            return $operation;
         }
+    }
 
-        return $pagesNumber;
+    public function getCategory($category_id)
+    {
+        $operation = [];
+
+        try {
+            $queryBuilder = $this->db->createQueryBuilder();
+            $queryBuilder->select('o.name','o.id')
+                ->from('operation', 'o')
+                ->innerJoin('o', 'categorie', 'c', 'o.categorie_id = c.id')
+                ->where('c.id = :id')
+                ->setParameter(':id', $category_id, \PDO::PARAM_INT);
+            $result = $queryBuilder->execute()->fetchAll();
+
+            if ($result) {
+                $operation = array_column($result, 'name');
+            }
+
+            return $operation;
+        } catch (DBALException $exception) {
+            return $operation;
+        }
+    }
+
+    public function loadOperationById($id)
+    {
+        try {
+            $month = $this->getMonth($id);
+
+            $category = $this->getCategory($month['id']);
+
+            return [
+                'month' => $month['name'],
+                'category' => $category['name'],
+            ];
+        } catch (DBALException $exception) {
+            throw (
+            sprintf('Operation "%s" does not exist.', $id)
+            );
+        }
     }
 }

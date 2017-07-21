@@ -19,7 +19,7 @@ class CategorieRepository
      *
      * const int NUM_ITEMS
      */
-    const NUM_ITEMS = 5;
+    const NUM_ITEMS = 10;
     /**
      * Doctrine DBAL connection.
      */
@@ -36,9 +36,9 @@ class CategorieRepository
     /**
      * Fetch all records.
      */
-    public function findAll($tab)
+    public function findAll()
     {
-        $queryBuilder = $this->queryAll($tab);
+        $queryBuilder = $this->queryAll();
 
         return $queryBuilder->execute()->fetchAll();
     }
@@ -46,10 +46,10 @@ class CategorieRepository
     /**
      * Find one record.
      */
-    public function findOneById($id, $tab)
+    public function findOneById($id)
     {
-        $queryBuilder = $this->queryAll($tab);
-        $queryBuilder->where('id = :id')
+        $queryBuilder = $this->queryAll();
+        $queryBuilder->where('c.id = :id')
             ->setParameter(':id', $id, \PDO::PARAM_INT);
         $result = $queryBuilder->execute()->fetch();
 
@@ -59,25 +59,25 @@ class CategorieRepository
     /**
     * Query all records.
     */
-    protected function queryAll($tab)
+    protected function queryAll()
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
         return $queryBuilder->select('*')
-            ->from($tab);
+            ->from('categorie', 'c');
     }
 
     /**
      * Get records paginated.
      */
-    public function findAllPaginated($page, $tab)
+    public function findAllPaginated($page)
     {
         $countQueryBuilderModifier = function ($queryBuilder) {
             $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
                 ->setMaxResults(1);
         };
 
-        $queryBuilder = $this->queryAll($tab);
+        $queryBuilder = $this->queryAll();
 
         $adapter = new DoctrineDbalAdapter($queryBuilder, $countQueryBuilderModifier);
         $pagerfanta = new Pagerfanta($adapter);

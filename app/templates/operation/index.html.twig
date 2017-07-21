@@ -12,12 +12,14 @@
                     <a href="log.html">Budżet domowy</a>
                 </div>
                 <div class="witaj">
-                    <p class="wyloguj">
-                        <a href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
-                            {{ 'auth.logout.label'|trans }}
-                        </a>
-                    </p>
-                    <p class="imie">Witaj _____, </p>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <p class="wyloguj">
+                            <a href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
+                                {{ 'auth.logout.label'|trans }}
+                            </a>
+                        </p>
+                        <p class="imie">Witaj {{ app.user.username }},</p>
+                    {% endif %}
                 </div>
                 <div class="historia">
                     <p><a title="Historia" href="#">Historia</a></p>
@@ -26,9 +28,9 @@
         </header>
         <div class="kontener">
             <div class="miesiac">
-                <a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>
-                <p class="data">LUTY</p>
-                <a title="Zobacz następny miesiąc" href="#.html"><span class="fa fa-angle-right"></span></a>
+                {#<a title="Zobacz poprzedni miesiac" href="#.html"><span class="fa fa-angle-left"></span></a>#}
+                <div class="data"><p>LUTY</p></div>
+                {#<a title="Zobacz następny miesiąc" href="#.html"><span class="fa fa-angle-right"></span></a>#}
             </div>
             <div class="limit">
                 <p>Limit: </p>
@@ -51,8 +53,8 @@
                 </form>
             </div>
             <div class="operacje">
-                {% if paginator.data|length %}
-                    {% for row in paginator.data %}
+                {% if paginator|length %}
+                    {% for row in paginator %}
                         <div class="kategoria k">
                             <p class="nazwa">{{ row.name|upper }}, {{ row.value }}</p>
                             <a title="Skasuj kategorię" href="#"><span class="fa fa-times-circle"></span></a>
@@ -63,7 +65,7 @@
             <div class="paginacja">
                 {% include 'default/_paginator.html.twig' with {
                 paginator: paginator,
-                route_name: 'operation_index_paginated',} %}
+                route_name: 'categorie_index_paginated',} %}
             </div>
         </div>
         <footer>
