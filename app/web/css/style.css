@@ -58,19 +58,15 @@ a{text-decoration:none; color:black;}
 .miesiac .data{width: 200px;  margin:0 auto;}
 .miesiac .data p{text-align: center;}
 /*.fa-angle-right{float:left; margin:0;}*/
-.limit{clear:both; width:350px; margin:5px auto 50px;}
-.limit p{font-size:1.3em; display:block; float:left; margin: 2px 5px 0 0;}
-.limit input{display:block; float:left; height:20px; width:250px; color:black; outline:none; border:none; font-size:1em;
-    background-color:#dddddd; font-weight:400; padding:5px 15px; font-family: Lato, helvetica, arial, sans-serif;}
 .wydatki{background-color: #D17B48; clear:both; width:200px; float:left; height:50px;}
 .stworz_kategorie{background-color:#D17B48 ; width:200px; float:left; height:50px; margin-left:5px;}
 .wprzycisk{text-align: center; font-size:1.2em; padding:12px; }
 .przyciski{margin-left:298px; margin-bottom:10px;}
-.zostalo{clear:both; width:220px; margin:0 auto; padding:10px 0 0 0;}
-.zostalo p{font-size:1.3em; display:block; float:left; margin: 2px 5px 0 0;}
-.zostalo input{display:block; float:left; height:20px; width:120px; color:black; outline:none; border:none; font-size:1em;
-    background-color:#ededed; font-weight:400; padding:5px 15px; font-family: Lato, helvetica, arial, sans-serif;}
-
+/*.limit{clear:both; width:220px; margin:0 auto; background-color: red;}
+.limit p{display:block; float:left; font-size:1.3em; background-color: blue; margin:5px auto;}
+*/
+.limit{clear:both; cdmargin:0 auto; width:300px;}
+.limit p{display:block; float:left; font-size: 1.3em; margin:7px 5px;}
 .kategorie{background-color:#838CA3; margin:45px 50px 0 50px ;}
 .kategoria{border-bottom: solid; height:50px; font-size:1.2em;}
 .kategoria .fa{float:left; margin: 17px 15px;}

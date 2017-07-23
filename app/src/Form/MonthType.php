@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\CallbackTransformer;
 
 /**
  * Class MonthType.
@@ -60,7 +61,31 @@ class MonthType extends AbstractType
                     'max_length' => 128,
                 ],
             ]
-        );
+        );/*
+        $builder->get('date_from')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($dateAsArray) {
+                    // transform the array to a string
+                    return implode(', ', (array)$dateAsArray);
+                },
+                function ($dateAsString) {
+                    // transform the string back to an array
+                    return explode(', ',  $dateAsString);
+                }
+            ))
+        ;
+        $builder->get('date_to')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($dateAsArray) {
+                    // transform the array to a string
+                    return implode(', ', (array)$dateAsArray);
+                },
+                function ($dateAsString) {
+                    // transform the string back to an array
+                    return explode(', ', $dateAsString);
+                }
+            ))
+        ;*/
     }
 
     /**

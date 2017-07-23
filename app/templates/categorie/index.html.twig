@@ -60,8 +60,8 @@
                 <div class="message">
                     {% include 'default/_flash_messages.html.twig' %}
                 </div>
-                {% if paginator|length %}
-                    {% for row in paginator %}
+                {% if categorie|length %}
+                    {% for row in categorie %}
                         <div class="kategoria k">
                             <span class="{{ row.icon }}"></span>
                             <p class="nazwa">{{ row.name|upper }}</p>
@@ -103,7 +103,7 @@
             </div>
             <div class="paginacja">
                 {% include 'default/_paginator.html.twig' with {
-                paginator: paginator,
+                paginator: categorie,
                 route_name: 'categorie_index_paginated',} %}
             </div>
         </div>

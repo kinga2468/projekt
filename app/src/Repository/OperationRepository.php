@@ -37,9 +37,9 @@ class OperationRepository
     /**
      * Fetch all records.
      */
-    public function findAll($tab)
+    public function findAll()
     {
-        $queryBuilder = $this->queryAll($tab);
+        $queryBuilder = $this->queryAll();
 
         return $queryBuilder->execute()->fetchAll();
     }
@@ -47,10 +47,10 @@ class OperationRepository
     /**
      * Find one record.
      */
-    public function findOneById($id, $tab)
+    public function findOneById($id)
     {
-        $queryBuilder = $this->queryAll($tab);
-        $queryBuilder->where('id = :id')
+        $queryBuilder = $this->queryAll();
+        $queryBuilder->where('o.id = :id')
             ->setParameter(':id', $id, \PDO::PARAM_INT);
         $result = $queryBuilder->execute()->fetch();
 
@@ -60,25 +60,25 @@ class OperationRepository
     /**
      * Query all records.
      */
-    protected function queryAll($tab)
+    protected function queryAll()
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
         return $queryBuilder->select('*')
-            ->from($tab);
+            ->from('operation', 'o');
     }
 
     /**
      * Get records paginated.
      */
-    public function findAllPaginated($page, $tab)
+    public function findAllPaginated($page)
     {
         $countQueryBuilderModifier = function ($queryBuilder) {
             $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
                 ->setMaxResults(1);
         };
 
-        $queryBuilder = $this->queryAll($tab);
+        $queryBuilder = $this->queryAll();
 
         $adapter = new DoctrineDbalAdapter($queryBuilder, $countQueryBuilderModifier);
         $pagerfanta = new Pagerfanta($adapter);
@@ -87,67 +87,42 @@ class OperationRepository
         return $pagerfanta;
     }
 
-    public function getMonth($month_id)
+    public function loadOperation($month_id, $categorie_id)
     {
-        $operation = [];
-
-        try {
-            $queryBuilder = $this->db->createQueryBuilder();
-            $queryBuilder->select('o.name', 'o.id')
-                ->from('operation', 'o')
-                ->innerJoin('o', 'month', 'm', 'o.month_id = m.id')
-                ->where('m.id = :id')
-                ->setParameter(':id', $month_id, \PDO::PARAM_INT);
-            $result = $queryBuilder->execute()->fetchAll();
-
-            if ($result) {
-                $operation = array_column($result, 'name');
-            }
-
-            return $operation;
-        } catch (DBALException $exception) {
-            return $operation;
-        }
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder->select('o.name', 'o.id', 'o.value')
+            ->from('operation', 'o')
+            ->innerJoin('o', 'categorie', 'c', 'o.categorie_id = c.id')
+            ->innerJoin('o', 'month', 'm', 'o.month_id = m.id')
+            ->where('o.month_id = :month_id')
+            ->setParameter(':month_id', $month_id, \PDO::PARAM_INT)
+            ->setParameter(':categorie_id', $categorie_id, \PDO::PARAM_INT);
+        $result = $queryBuilder->execute()->fetchAll();
+        return $result;
     }
 
-    public function getCategory($category_id)
+    public function getOperationByCategoryId($categorie_id)
     {
-        $operation = [];
-
-        try {
-            $queryBuilder = $this->db->createQueryBuilder();
-            $queryBuilder->select('o.name','o.id')
-                ->from('operation', 'o')
-                ->innerJoin('o', 'categorie', 'c', 'o.categorie_id = c.id')
-                ->where('c.id = :id')
-                ->setParameter(':id', $category_id, \PDO::PARAM_INT);
-            $result = $queryBuilder->execute()->fetchAll();
-
-            if ($result) {
-                $operation = array_column($result, 'name');
-            }
-
-            return $operation;
-        } catch (DBALException $exception) {
-            return $operation;
-        }
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder->select('o.name', 'o.id', 'o.value')
+            ->from('operation', 'o')
+            ->innerJoin('o', 'categorie', 'c', 'o.categorie_id = c.id')
+            ->where('o.categorie_id = :categorie_id')
+            ->setParameter(':categorie_id', $categorie_id, \PDO::PARAM_INT);
+        $result = $queryBuilder->execute()->fetchAll();
+        return $result;
     }
 
-    public function loadOperationById($id)
+    public function getOperationByMonthId($month_id)
     {
-        try {
-            $month = $this->getMonth($id);
-
-            $category = $this->getCategory($month['id']);
-
-            return [
-                'month' => $month['name'],
-                'category' => $category['name'],
-            ];
-        } catch (DBALException $exception) {
-            throw (
-            sprintf('Operation "%s" does not exist.', $id)
-            );
-        }
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder->select('o.name', 'o.id', 'o.value', 'categorie_id')
+            ->from('operation', 'o')
+            ->innerJoin('o', 'month', 'm', 'o.month_id = m.id')
+            ->where('o.month_id = :month_id')
+            ->setParameter(':month_id', $month_id, \PDO::PARAM_INT);
+        $result = $queryBuilder->execute()->fetchAll();
+        return $result;
     }
+
 }

@@ -57,7 +57,7 @@ class CategorieController implements ControllerProviderInterface
 
         return $app['twig']->render(
             'categorie/index.html.twig',
-            ['paginator' => $categorieRepository->findAll()]
+            ['categorie' => $categorieRepository->findAll()]
         );
     }
 

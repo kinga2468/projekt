@@ -47,10 +47,10 @@
                 {#<a title="Zobacz następny miesiąc" href="#.html"><span class="fa fa-angle-right"></span></a>#}
             </div>
             <div class="limit">
+                {% if month|length %}
                 <p>Limit: </p>
-                <form action="#" method="post">
-                    <input type="text" name="limit" placeholder="Podaj kwotę"/>
-                </form>
+                <p>{{ month.upper_limit }}</p>
+                {% endif %}
             </div>
             <div class="przyciski">
                 <div class="wydatki">
@@ -60,11 +60,11 @@
                     <p class="wprzycisk"><a title="stwórz kategorie" href="#">Stwórz kategorie</a></p>
                 </div>
             </div>
-            <div class="zostalo">
-                <p>Zostało: </p>
-                <form action="#" method="post">
-                    <input type="text" name="zostalo"/>
-                </form>
+            <div class="limit">
+                {% if month|length %}
+                    <p>Zostało: </p>
+                    <p>{{ month.remained }}</p>
+                {% endif %}
             </div>
             <div class="kategorie">
 

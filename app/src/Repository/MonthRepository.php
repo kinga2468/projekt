@@ -8,6 +8,7 @@ use Doctrine\DBAL\Connection;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineDbalAdapter;
 use Doctrine\DBAL\DBALException;
+use Symfony\Component\Form\Extension\Core\Type\Date;
 /**
  * Class MonthRepository.
  */
@@ -96,8 +97,6 @@ class MonthRepository
         $user_id = $this -> findUserIdByLogin($userLogin);
         $month['user_id'] = $user_id;
         $month['remained'] = $month['upper_limit'];
-        //ConvertToDateTime($month['date_from']);
-        //$month['date_to'] -> format('d/m/Y');
 
         if (isset($month['id']) && ctype_digit((string) $month['id']) && isset($user_id)) {
             // update record

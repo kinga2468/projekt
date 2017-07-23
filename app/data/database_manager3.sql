@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `month` (
   `date_to` DATE NOT NULL,
   `upper_limit` DECIMAL(12,2) NOT NULL,
   `remained` DECIMAL(12,2) NOT NULL,
+  `expenses` DECIMAL(12,2) NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),

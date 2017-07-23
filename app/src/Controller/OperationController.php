@@ -36,38 +36,26 @@ class OperationController implements ControllerProviderInterface
     /**
      * Index action.
      */
-    /*public function indexAction(Application $app, $page = 1)
+    public function indexAction(Application $app)
     {
         $operationRepository = new OperationRepository($app['db']);
 
         return $app['twig']->render(
             'operation/index.html.twig',
-            ['paginator' => $operationRepository->findAllPaginated($page, 'operation')]
+            ['operation' => $operationRepository-> loadOperation($month_id = 1, $categorie_id = 1)]
         );
-    }*/
+    }
 
     /**
      * View action.
      */
-    public function viewAction(Application $app, Request $request)
+    public function viewAction(Application $app, $id)
     {
         $operationRepository = new OperationRepository($app['db']);
 
-        $id = $request->get('id');
         return $app['twig']->render(
             'operation/view.html.twig',
-            ['operation' => $operationRepository->findOneById($id, 'operation'),
-                'id' => $id]
-        );
-    }
-
-    public function indexAction(Application $app, $id=1)
-    {
-        $operationRepository = new OperationRepository($app['db']);
-
-        return $app['twig']->render(
-            'operation/index.html.twig',
-            ['paginator' => $operationRepository->loadOperationById($id)]
+            ['operation' => $operationRepository->findOneById($id)]
         );
     }
 
