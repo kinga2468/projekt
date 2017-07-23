@@ -1,7 +1,7 @@
 Zarządzanie budżetem domowym - framework Silex
 
--kategorie wydatków (np. zakupy, paliwo, rachunki) dodawanie kategorii, możlwość jej modyfikacji i usunięcia
--możliwość ustalenia głównego limitu
--ostrzeżenia w razie przekroczenia limitu ogólnego
--potwierdzenia usunięcia czegoś przez użytkownika
--możliwość przeglądania porzednich miesięcy (historia_
+1.kategorie wydatków (np. zakupy, paliwo, rachunki) dodawanie kategorii, możlwość jej modyfikacji i usunięcia
+2.możliwość ustalenia głównego limitu
+3.ostrzeżenia w razie przekroczenia limitu ogólnego
+4.potwierdzenia usunięcia czegoś przez użytkownika
+5.możliwość przeglądania porzednich miesięcy (historia)
