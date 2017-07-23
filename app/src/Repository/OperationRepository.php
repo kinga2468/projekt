@@ -125,4 +125,11 @@ class OperationRepository
         return $result;
     }
 
+    public function loadOperation2($month_id)
+    {
+        $month = $this->getOperationByMonthId($month_id);
+        $category = $this->getOperationByCategoryId($month['categorie_id']);
+        return $category;
+    }
+
 }

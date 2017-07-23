@@ -42,7 +42,7 @@ class OperationController implements ControllerProviderInterface
 
         return $app['twig']->render(
             'operation/index.html.twig',
-            ['operation' => $operationRepository-> loadOperation($month_id = 1, $categorie_id = 1)]
+            ['operation' => $operationRepository-> loadOperation2($month_id = 1)]
         );
     }
 
